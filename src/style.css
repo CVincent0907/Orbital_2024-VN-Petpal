@@ -1,0 +1,287 @@
+body {
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color:black;
+  color: white;
+  width: 245px;
+  height: 85px;
+  margin-top: 30px;
+  margin-left: 30px;
+  display: flex;
+  justify-content:left;
+  gap:5px;
+}
+
+.paw {
+  width: 60px;
+  height: 65px;
+  padding-top: 10px;
+  padding-left: 10px;
+
+}
+
+.petpal {
+  font-size: 64px;
+  margin-top: 5px;
+  font-weight: 400px;
+  font-family: "Londrina Solid", sans-serif;
+}
+
+.signIn {
+  font-family:"Inter", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+}
+
+.signUp {
+  font-family:"Inter", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  margin-left: 30px;
+}
+
+.boldShelter {
+  margin-left: 10px;
+  font-weight: 900;
+}
+
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  width: 530px;
+}
+
+input {
+  width: 530px;
+  padding-left: 14px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color:black;
+}
+
+input::placeholder {
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color: #828282;
+}
+
+.forgotPw {
+  margin-top: 5px;
+  line-height: 21px;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  color: #828282;
+  font-weight:600;
+}
+
+.loginButton {
+  width: 550px;
+  height: 53.2px;
+  padding: auto;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.alternative {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #828282;
+}
+
+.button {
+  width: 550px;
+  height: 53.2px;
+  padding: auto;
+  border-radius: 8px;
+  color: black;
+  background-color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.registerLine {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.ask {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Gilroy';
+  color: #828282;
+}
+
+.register {
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Gilroy';
+  color: #828282;
+
+}
+
+.divider {
+ display: grid;
+ grid-template-columns: 2fr 1fr;
+ height:100vh;
+}
+
+
+.content {
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.background-image {
+  background-image: url('./imageProject/side_image\ \(1\).png'); /* Replace with your image path */
+  background-size:cover; /* Cover the entire div */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* No repeat */
+  width:auto;
+}
+
+.input-field-name {
+  font-weight:bold;
+  font-family:"Inter", sans-serif;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  height:10px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.next-button {
+  border-radius:8px;
+  color:white;
+  background-color: black;
+  position: absolute;
+  width: 200px;
+  height: 70px;
+  bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  font-family:"Inter", sans-serif; ;
+  left: calc(50%); 
+}
+
+.RegisterFormSection {
+  margin-left: 30px;
+}
+
+.registerForm {
+ line-height: 35px;
+}
+
+.description-area {
+  width: 530px;
+  padding-left: 14px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-family:"Inter", sans-serif;
+  font-size: 15px;
+}
+
+.description-area::placeholder {
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color: #828282;
+}
+
+.country {
+  font-weight:bold;
+  font-family:"Inter", sans-serif;
+  margin-bottom: 30px;
+}
+
+.select-country {
+  width: 550px;
+  padding-left: 14px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color: #828282;
+}
+
+option {
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color: #828282;
+}
+
+.address {
+  line-height: 75px;
+  margin-bottom: 15px;
+}
+
+.postcode-city-field {
+  display: flex;
+  gap: 10px;
+}
+
+.postcode-city-field input {
+  width:250px
+}
+
+.phone-section {
+  font-weight:bold;
+  font-family:"Inter", sans-serif;
+  margin-bottom: 30px;
+}
+
+.phone {
+  display: flex ;
+  width: 550px;
+  gap: 10px;
+}
+
+.select-country-code {
+  padding-left: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-size: 20px;
+  font-weight: 500;
+  font-family:"Inter", sans-serif;
+  color: #828282;
+}
+
