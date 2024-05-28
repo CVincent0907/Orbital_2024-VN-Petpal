@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import InputField from "./InputField";
 
-export default function RegisterForm1() {
+export default function RegisterForm1(props) {
     const navigate = useNavigate();
     const [Name, setName] = useState("");
     const [Description, setDescription] = useState("");
@@ -17,29 +17,28 @@ export default function RegisterForm1() {
             return;
         } 
            
-            const formData = new FormData();
-            formData.append('name', Name);
-            formData.append('description', Description);
-            formData.append('contact_email', ContactEmail);
-            
-            try {
-                const response = await axios.post('http://localhost:8000/api/step-two/', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                });
-
-                if (response.status === 200) {
-                    navigate("/registerPage2");
-                } else {
-                    alert("Failed to proceed to the next step. Please try again.");
-                }
-            } catch (error) {
-                alert("Registration failed. Please try again. Error: " + error.message);
+        try {
+            const response = await axios.post('http://localhost:8000/api/register_step_two/', { 
+                user_id: props.userId,
+                name: Name,
+                description: Description,
+                contact_email: ContactEmail
                 
+            });
+            if (response.status === 200) {
+                navigate('/registerPage2');
             }
+        } catch (error) {
+            console.error("There was an error registering the user!", error);
+            if (error.response) {
+                console.error("Response data:", error.response.data);
+                console.error("Response status:", error.response.status);
+                console.error("Response headers:", error.response.headers);
+            }
+            alert("Registration failed. Please try again. Message: " + error.message);
         }
-
+    };
+    
     return (
         <div>
             <section className="RegisterFormSection">

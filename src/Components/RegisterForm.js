@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import InputField from "./InputField";
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
     const navigate = useNavigate();
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
-    const [CPassword, setCPassword] = useState("");
+    const [Email, setEmail] = useState(null);
+    const [Password, setPassword] = useState(null);
+    const [CPassword, setCPassword] = useState(null);
 
     const goToNextPage = async (e) => {
         e.preventDefault();
@@ -20,27 +20,21 @@ export default function RegisterForm() {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('email', Email);
-        formData.append('password', Password);
-
         try {
-            const response = await axios.post('http://localhost:8000/api/step-one/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            const response = await axios.post('http://localhost:8000/api/register_step_one/', { 
+                email: Email, // Use 'email' instead of 'Email'
+                password: Password // Use 'password' instead of 'Password'
             });
-
-            if (response.status === 200) {
+            if (response.status === 201) {
+                props.setUserId(response.data.user_id);
                 navigate('/registerPage1');
-            } else {
-                alert("Registration failed. Please try again.");
             }
         } catch (error) {
-           // Inside the catch block
-            alert("Registration failed. Please try again. Error: " + error.message);
+            console.error("There was an error registering the user!", error);
+            alert("Registration failed. Please try again. Message: " + error.message);
         }
     };
+
 
     return (
         <div>
