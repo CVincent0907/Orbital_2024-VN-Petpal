@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third-party
     'rest_framework',
     'corsheaders',
+
+    # own
     'users',
 ]
 
@@ -80,12 +84,13 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'petpalDB',
-        'USER': 'root',
-        'PASSWORD': '66326632Az)',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': 'petpalDB',
+        # 'USER': 'root',
+        # 'PASSWORD': '66326632Az)',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
     }
 }
 
