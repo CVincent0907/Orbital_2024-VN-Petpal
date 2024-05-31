@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "./Components/Navbar";
-import RegisterForm1 from "./Components/RegisterForm1";
+import Navbar from "./components/Navbar";
+import RegisterForm2 from "./components/RegisterForm2";
 
-export default function RegisterPg1(props) {
+export default function RegisterPg2(props) {
     return (
         <div className="divider">
         <div className="content">
@@ -10,7 +10,7 @@ export default function RegisterPg1(props) {
         <br/>
         <br/>
         <br/>
-        <RegisterForm1 userId={props.userId}/>
+        <RegisterForm2 userId={props.userId}/>
         </div>
         <div className="background-image"></div>
         </div>

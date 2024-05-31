@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./Components/Navbar";
-import RegisterForm from "./Components/RegisterForm";
-import Sign from "./Components/Sign";
+import Navbar from "./components/Navbar";
+import RegisterForm from "./components/RegisterForm";
+import Sign from "./components/Sign";
 
 export default function RegisterPg(props) {
     return (

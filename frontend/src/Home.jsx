@@ -1,8 +1,8 @@
 import React from "react";
-import LoginForm from "./Components/LoginForm";
-import Navbar from "./Components/Navbar";
-import Register from "./Components/Register";
-import Sign from "./Components/Sign";
+import LoginForm from "./components/LoginForm";
+import Navbar from "./components/Navbar";
+import Register from "./components/Register";
+import Sign from "./components/Sign";
 
 export default function Home() {
     return (

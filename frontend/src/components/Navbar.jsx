@@ -1,5 +1,5 @@
 import React from "react";
-import Paw from "../imageProject/Paw image.png";
+import Paw from "../assets/Paw image.png";
 
 export default function Navbar() {
     return (

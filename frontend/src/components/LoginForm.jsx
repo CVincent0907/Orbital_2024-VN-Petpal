@@ -1,8 +1,8 @@
 // Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Facebook from "../imageProject/Facebook icon (1).png";
-import Google from "../imageProject/Google icon.png";
+import Facebook from "../assets/Facebook icon (1).png";
+import Google from "../assets/Google icon.png";
 
 export default function Login() {
     const [email, setEmail] = useState("");
