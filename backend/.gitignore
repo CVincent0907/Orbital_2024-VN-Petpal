@@ -1,6 +1,8 @@
 # testing
 /coverage
 db.sqlite3
+__pycache__/
+*.pyc
 
 # Environments
 .venv
