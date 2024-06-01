@@ -33,6 +33,14 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('email',)
 
 
+class EmailIsAvailableSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def is_available(self, clean_data):
+        user = UserModel.objects.filter(email=clean_data['email'])
+        return not user.exists()
+
+
 # class RegisterStepOneSerializer(serializers.ModelSerializer):
 #     password = serializers.CharField(write_only=True)
 

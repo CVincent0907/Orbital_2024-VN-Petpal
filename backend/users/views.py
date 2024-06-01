@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
 
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, EmailIsAvailableSerializer
 
 UserModel = get_user_model()
 
@@ -56,6 +56,18 @@ class UserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+
+
+class EmailIsAvailable(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        data = request.data
+        serializer = EmailIsAvailableSerializer(data=data)
+        if serializer.is_valid():
+            is_available = serializer.is_available(data)
+            return Response({'is_available': is_available}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # @api_view(['GET'])
