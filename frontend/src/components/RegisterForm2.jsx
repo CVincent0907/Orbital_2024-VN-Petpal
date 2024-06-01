@@ -1,70 +1,40 @@
-import axios from "axios"; // Don't forget to import axios
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Address from "./Address";
 import Button from "./Button";
-import Country from "./Country";
-import Phone from "./Phone";
+import InputField from "./InputField";
 
 export default function RegisterForm2(props) {
-    const navigate = useNavigate();
+    const [Name, setName] = useState("");
+    const [Description, setDescription] = useState("");
+    const [ContactEmail, setContactEmail] = useState("");
 
-    const [country, setCountry] = useState("");
-    const [address, setAddress] = useState("");
-    const [optionalAddress, setOptionalAddress] = useState("");
-    const [postcode, setPostcode] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [countryCode, setCountryCode] = useState("");
-    const [phone, setPhone] = useState("");
-
-    const handleSubmit = async (e) => {
+    const goToNextPage = async (e) => {
         e.preventDefault();
-
-        if (
-            country &&
-            address &&
-            postcode &&
-            city &&
-            state &&
-            countryCode &&
-            phone
-        ) {
-            try {
-                const response = await axios.post('http://localhost:8000/api/register_step_three/', {
-                    user_id: props.userId,
-                    country: country,
-                    street_required: address,
-                    street_optional: optionalAddress,
-                    postcode: postcode,
-                    city: city,
-                    state: state,
-                    country_code: countryCode,
-                    phone_number: phone
-                });
-                if (response.status === 200) {
-                    alert("Your account has been successfully created!");
-                    navigate('/dashboard');
-                }
-            } catch (error) {
-                console.error("There was an error completing the registration!", error);
-                alert("Registration failed. Please try again. Message: " + error.message);
-            }
-        } else {
-            alert("Please fill in all required fields.");
+        if (Name === "") {
+            alert("Please enter a name.");
+            return;
         }
+        props.setName(Name);
+        props.setDesc(Description);
+        props.setContactEmail(ContactEmail);
+        props.next();
     };
-
+    
     return (
         <div>
-        <section className="RegisterFormSection">
-            <form className="registerForm" onSubmit={handleSubmit}>
-            <Country country={setCountry}/>
-            <Address address={setAddress} optional={setOptionalAddress} postcode={setPostcode} city={setCity} state={setState}/>
-            <Phone code={setCountryCode} phone={setPhone}/>
-            <Button className="next-button" name="Submit"/>
-            </form>
-        </section>
+            <section className="RegisterFormSection">
+                <form className="registerForm" >
+                    <InputField type="text" placeholder="Name" id="Name" name="Name" autoFocus={true} change={(e) => setName(e.target.value)}/>
+                    <label className="input-field-name">Description:</label>
+                    <br/>
+                    <textarea className="description-area" placeholder="Enter a short description of your animal shelter" 
+                        id="description" name="description" rows="10" cols="50" onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <br/>
+                    <br/>
+                    <label className="input-field-name">Contact email:</label>
+                    <input type="email" placeholder="Email" id="contact-email" name="Contact email" autoFocus={false} onChange={(e) => setContactEmail(e.target.value)}/>
+                    <Button className="next-button" name="Next" onClick = {goToNextPage} />
+                </form>
+            </section>
         </div>
-    )
+    );
 }

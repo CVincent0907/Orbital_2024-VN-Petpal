@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 
 export default function Country(props) {
@@ -12,5 +13,5 @@ export default function Country(props) {
             </select>
             </div>
         </div>   
-    )
+    );
 }

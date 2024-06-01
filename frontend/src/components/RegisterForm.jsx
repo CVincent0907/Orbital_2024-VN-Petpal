@@ -1,52 +1,38 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "./Button";
-import InputField from "./InputField";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import RegisterForm1 from './RegisterForm1';
+import RegisterForm2 from './RegisterForm2';
+import RegisterForm3 from './RegisterForm3';
+
 
 export default function RegisterForm(props) {
-    const navigate = useNavigate();
-    const [Email, setEmail] = useState(null);
-    const [Password, setPassword] = useState(null);
-    const [CPassword, setCPassword] = useState(null);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [desc, setDesc] = useState("");
+    const [contactEmail, setContactEmail] = useState("");
 
-    const goToNextPage = async (e) => {
-        e.preventDefault();
-        if (Email === "" || Password === "" || CPassword === "") {
-            alert("Please fill in all fields.");
-            return;
-        } else if (Password !== CPassword) {
-            alert("Password do not match.");
-            return;
-        }
+    // const [country, setCountry] = useState("");
+    // const [street1, setStreet1] = useState("");
+    // const [street2, setStreet2] = useState("");
+    // const [postcode, setPostcode] = useState("");
+    // const [city, setCity] = useState("");
+    // const [state, setState] = useState("");
+    // const [phone, setPhone] = useState("");
 
-        try {
-            const response = await axios.post('http://localhost:8000/api/register_step_one/', { 
-                email: Email, // Use 'email' instead of 'Email'
-                password: Password // Use 'password' instead of 'Password'
-            });
-            if (response.status === 201) {
-                props.setUserId(response.data.user_id);
-                navigate('/registerPage1');
-            }
-        } catch (error) {
-            console.error("There was an error registering the user!", error);
-            alert("Registration failed. Please try again. Message: " + error.message);
-        }
-    };
+    const [index, setIndex] = useState(1);
+    function next() {
+        setIndex((curr) => curr + 1);
+    }
 
-
-    return (
-        <div>
-            <section className="RegisterFormSection">
-                <form className="registerForm">
-                    <InputField type="email" placeholder="Email" id="email" name="Email" autoFocus={true} change={(e) => setEmail(e.target.value)}/>
-                    <InputField type="password" placeholder="Password" id="password" name="Password" autoFocus={false} change={(e) => setPassword(e.target.value)}/>
-                    <label className="input-field-name" htmlFor="confirm-password">Confirm password:</label>
-                    <input type="password" placeholder="Password" id="confirm-password" name="Confirm password"  onChange={(e) => setCPassword(e.target.value)}/>
-                    <Button className="next-button" name="Next" onClick = {goToNextPage} />
-                </form>
-            </section>
-        </div>
-    )
+    switch(index) {
+        case 1:
+            return <RegisterForm1 next={next} setEmail={setEmail} setPassword={setPassword} />;
+        case 2:
+            return <RegisterForm2 next={next} setName={setName} setDesc={setDesc} setContactEmail={setContactEmail} />;
+        case 3:
+            return <RegisterForm3 next={next} email={email} password={password} name={name} desc={desc} contactEmail={contactEmail} />;
+    }
 }

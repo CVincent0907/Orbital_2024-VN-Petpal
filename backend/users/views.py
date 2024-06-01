@@ -21,7 +21,7 @@ class UserRegister(APIView):
         # TODO: create validations to cleanup data
         data = request.data
         serializer = UserRegisterSerializer(data=data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data=data)
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)

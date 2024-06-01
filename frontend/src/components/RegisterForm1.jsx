@@ -1,60 +1,60 @@
-import axios from "axios"; // Don't forget to import axios
+import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+
 import Button from "./Button";
 import InputField from "./InputField";
 
+
 export default function RegisterForm1(props) {
-    const navigate = useNavigate();
-    const [Name, setName] = useState("");
-    const [Description, setDescription] = useState("");
-    const [ContactEmail, setContactEmail] = useState("");
+    const emailre = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+
+    const [Email, setEmail] = useState("");
+    const [Password, setPassword] = useState("");
+    const [CPassword, setCPassword] = useState("");
 
     const goToNextPage = async (e) => {
         e.preventDefault();
-        if (Name === "" || Description === "" || ContactEmail === "") {
+        if (Email === "" || Password === "" || CPassword === "") {
             alert("Please fill in all fields.");
             return;
-        } 
-           
+        } else if (!emailre.test(Email)) {
+            alert("Please enter a valid email address.");
+            return;
+        } else if (Password !== CPassword) {
+            alert("Password do not match.");
+            return;
+        }
+
         try {
-            const response = await axios.post('http://localhost:8000/api/register_step_two/', { 
-                user_id: props.userId,
-                name: Name,
-                description: Description,
-                contact_email: ContactEmail
-                
+            const response = await axios.post('http://localhost:8000/api/is-available/', { 
+                email: Email, // Use 'email' instead of 'Email'
             });
-            if (response.status === 200) {
-                navigate('/registerPage2');
+            if (response.data.is_available) {
+                props.setEmail(Email);
+                props.setPassword(Password);
+                props.next();
+            } else {
+                alert("This email already has a registered account.");
+                return;
             }
         } catch (error) {
             console.error("There was an error registering the user!", error);
-            if (error.response) {
-                console.error("Response data:", error.response.data);
-                console.error("Response status:", error.response.status);
-                console.error("Response headers:", error.response.headers);
-            }
             alert("Registration failed. Please try again. Message: " + error.message);
         }
     };
-    
+
+
     return (
         <div>
             <section className="RegisterFormSection">
-                <form className="registerForm" >
-                    <InputField type="text" placeholder="Name" id="Name" name="Name" autoFocus={true} change={(e) => setName(e.target.value)}/>
-                    <label className="input-field-name">Description:</label>
-                    <br/>
-                    <textarea className="description-area" placeholder="Enter a short description of your animal shelter" 
-                        id="description" name="description" rows="10" cols="50" onChange={(e) => setDescription(e.target.value)} required></textarea>
-                    <br/>
-                    <br/>
-                    <label className="input-field-name">Contact email:</label>
-                    <input type="email" placeholder="Email" id="contact-email" name="Contact email" autoFocus={false} onChange={(e) => setContactEmail(e.target.value)}/>
+                <form className="registerForm">
+                    <InputField type="email" placeholder="Email" id="email" name="Email" autoFocus={false} change={(e) => setEmail(e.target.value)}/>
+                    <InputField type="password" placeholder="Password" id="password" name="Password" autoFocus={false} change={(e) => setPassword(e.target.value)}/>
+                    <label className="input-field-name" htmlFor="confirm-password">Confirm password:</label>
+                    <input type="password" placeholder="Password" id="confirm-password" name="Confirm password"  onChange={(e) => setCPassword(e.target.value)}/>
                     <Button className="next-button" name="Next" onClick = {goToNextPage} />
                 </form>
             </section>
         </div>
-    );
+    )
 }

@@ -20,17 +20,21 @@ class UserManager(BaseUserManager):
             raise ValueError("A password is required.")
         user = self.create_user(email=email, password=password, **extra_fields)
         user.is_superuser = True
+        user.is_staff = True
         user.save()
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # auto fields
     id = models.AutoField(primary_key=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    is_staff = models.BooleanField(default=False)
+
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     name = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     contact_email = models.EmailField(blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
     
     country = models.CharField(max_length=255, blank=True, null=True)
     street_1 = models.CharField(max_length=255, blank=True, null=True)
