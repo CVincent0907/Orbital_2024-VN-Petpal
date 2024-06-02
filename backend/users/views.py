@@ -7,12 +7,28 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
+from .serializer import LoginSerializer
 
 User = get_user_model()
+
 
 @api_view(['GET'])
 def temporary_home(request):
     return HttpResponse("Welcome to the temporary home page!")
+    
+@api_view(['POST'])
+def login_view(request):
+    serializer = LoginSerializer(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            return JsonResponse({'success': True, 'message': 'Login successful'})
+        else:
+            return JsonResponse({'success': False, 'message': 'Invalid email or password'})
+    return JsonResponse({'success': False, 'message': 'Invalid data', 'errors': serializer.errors})
 
 @csrf_exempt
 @api_view(['POST'])
