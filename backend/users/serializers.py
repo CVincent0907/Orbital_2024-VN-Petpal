@@ -36,8 +36,8 @@ class UserSerializer(serializers.ModelSerializer):
 class EmailIsAvailableSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
-    def is_available(self, clean_data):
-        user = UserModel.objects.filter(email=clean_data['email'])
+    def is_available(self, email):
+        user = UserModel.objects.filter(email=email)
         return not user.exists()
 
 

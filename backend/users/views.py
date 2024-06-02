@@ -11,7 +11,6 @@ from rest_framework import permissions, status
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, EmailIsAvailableSerializer
 
-
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -24,7 +23,6 @@ class UserRegister(APIView):
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-
 
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -60,12 +58,10 @@ class EmailIsAvailable(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, email):
-        data = {email: email}
-        serializer = EmailIsAvailableSerializer(data=data)
-        if serializer.is_valid():
-            is_available = serializer.is_available(data)
-            return Response({'is_available': is_available}, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        serializer = EmailIsAvailableSerializer(email)
+        
+        is_available = serializer.is_available(email)
+        return Response({'is_available': is_available}, status=status.HTTP_200_OK)
 
 
 # @api_view(['GET'])

@@ -91,9 +91,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        # 'NAME': 'petpalDB',
+
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'PetPal',
         # 'USER': 'root',
-        # 'PASSWORD': '66326632Az)',
+        # 'PASSWORD': 'Nathan0509',
         # 'HOST': 'localhost',
         # 'PORT': '3306',
     }

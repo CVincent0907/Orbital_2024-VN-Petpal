@@ -11,6 +11,8 @@ export default function Dashboard() {
     const [name, setName] = useState("<name>")
 
     useEffect(() => {
+        document.title = "Dashboard";
+
         const response = axios.get("/api/user/")
         .then((res) => {
             setName(res.data.user.name);
@@ -23,8 +25,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <h1>Dashboard</h1>
-            <h2>{name}</h2>
+            <h1>{name}</h1>
         </>
     )
 }
