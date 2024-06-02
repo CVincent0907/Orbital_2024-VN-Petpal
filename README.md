@@ -65,12 +65,12 @@ PetPal ensures that all users are authenticated and verified, providing a secure
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/yourusername/petpal.git
+   git clone https://github.com/CVincent0907/Orbital_2024-VN-Petpal.git
    ```
 
 2. **Backend Setup**:
    ```sh
-   cd petpal/backend
+   cd Orbital_2024-VN-Petpal/backend
    pip install -r requirements.txt
    python manage.py migrate
    python manage.py createsuperuser
@@ -79,7 +79,7 @@ PetPal ensures that all users are authenticated and verified, providing a secure
 
 3. **Frontend Setup**:
    ```sh
-   cd petpal/frontend
+   cd Orbital_2024-VN-Petpal/frontend
    npm install
    npm start
    ```
