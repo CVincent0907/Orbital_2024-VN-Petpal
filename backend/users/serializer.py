@@ -31,3 +31,7 @@ class RegisterStepThreeSerializer(serializers.ModelSerializer):
             'country', 'street_required', 'street_optional', 'postcode',
             'city', 'state', 'country_code', 'phone_number'
         ]
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
