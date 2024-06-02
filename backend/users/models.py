@@ -32,17 +32,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    contact_email = models.EmailField(blank=True, null=True)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    contact_email = models.EmailField(blank=True)
     
-    country = models.CharField(max_length=255, blank=True, null=True)
-    street_1 = models.CharField(max_length=255, blank=True, null=True)
-    street_2 = models.CharField(max_length=255, blank=True, null=True)
-    postcode = models.CharField(max_length=20, blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    state = models.CharField(max_length=255, blank=True, null=True)
-    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=255, blank=True)
+    street_1 = models.CharField(max_length=255, blank=True)
+    street_2 = models.CharField(max_length=255, blank=True)
+    postcode = models.CharField(max_length=20, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    state = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'country', 'street_1', 'postcode', 'city', 'state']

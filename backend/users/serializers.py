@@ -30,7 +30,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('email',)
+        exclude = ('password', 'groups', 'user_permissions', 'is_superuser', 'is_staff',)
 
 
 class EmailIsAvailableSerializer(serializers.Serializer):

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # own
     'users',
+    'pets',
 ]
 
 MIDDLEWARE = [

@@ -2,7 +2,7 @@
 # from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.parsers import JSONParser
 # from .serializer import RegisterStepOneSerializer, RegisterStepTwoSerializer, RegisterStepThreeSerializer
-from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth import login, logout
 from rest_framework.authentication import SessionAuthentication
 # from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -10,8 +10,6 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, EmailIsAvailableSerializer
-
-UserModel = get_user_model()
 
 
 class UserRegister(APIView):
