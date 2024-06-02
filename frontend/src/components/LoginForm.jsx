@@ -1,8 +1,14 @@
 // Login.js
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Facebook from "../assets/Facebook icon (1).png";
 import Google from "../assets/Google icon.png";
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -12,9 +18,17 @@ export default function Login() {
         e.preventDefault();
         if (email === "" || password === "") {
             alert("Please fill in both email and password fields.");
-        } else {
-            navigate("/dashboard")
+            return;
         }
+        axios.post('/api/login/', {
+            email: email,
+            password: password
+        }).then((res) => {
+            navigate('/dashboard');
+        }).catch((error) => {
+            alert("Error: " + error.message);
+            console.log(error);
+        });
     };
 
     return (

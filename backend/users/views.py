@@ -59,8 +59,8 @@ class UserView(APIView):
 class EmailIsAvailable(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request):
-        data = request.data
+    def get(self, request, email):
+        data = {email: email}
         serializer = EmailIsAvailableSerializer(data=data)
         if serializer.is_valid():
             is_available = serializer.is_available(data)

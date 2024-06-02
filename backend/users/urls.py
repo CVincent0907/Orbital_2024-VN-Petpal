@@ -7,7 +7,7 @@ urlpatterns = [
     path('login/', views.UserLogin.as_view(), name='login'),
     path('logout/', views.UserLogout.as_view(), name='logout'),
     path('user/', views.UserView.as_view(), name='user'),
-    path('is-available/', views.EmailIsAvailable.as_view(), name='check_email')
+    path('is-available/<str:email>', views.EmailIsAvailable.as_view(), name='check_email')
 
     # path('register_step_one/', register_step_one, name='register_step_one'),
     # path('register_step_two/', register_step_two, name='register_step_two'),

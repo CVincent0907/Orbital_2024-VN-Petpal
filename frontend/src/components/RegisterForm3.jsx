@@ -7,6 +7,10 @@ import Button from "./Button";
 import Country from "./Country";
 import Phone from "./Phone";
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
 export default function RegisterForm3(props) {
     const navigate = useNavigate();
@@ -22,40 +26,40 @@ export default function RegisterForm3(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (
-            country &&
-            address &&
-            postcode &&
-            city &&
-            state
-        ) {
-            try {
-                const response = await axios.post('http://localhost:8000/api/register/', {
-                    email: props.email,
-                    password: props.password,
-                    name: props.name,
-                    description: props.desc,
-                    contact_email: props.contactEmail,
-
-                    country: country,
-                    street_1: address,
-                    street_2: optionalAddress,
-                    postcode: postcode,
-                    city: city,
-                    state: state,
-                    phone_number: phone
-                });
-                if (response.status === 201) {
-                    alert("Your account has been successfully created!");
-                    navigate('/dashboard');
-                }
-            } catch (error) {
-                console.error("There was an error completing the registration!", error);
-                alert("Registration failed. Please try again. Message: " + error.message);
-            }
-        } else {
+        if (!(country && address && postcode && city && state)) {
             alert("Please fill in all required fields.");
+            return;
         }
+        axios.post('api/register/', {
+            email: props.email,
+            password: props.password,
+            name: props.name,
+            description: props.desc,
+            contact_email: props.contactEmail,
+
+            country: country,
+            street_1: address,
+            street_2: optionalAddress,
+            postcode: postcode,
+            city: city,
+            state: state,
+            phone_number: phone
+        }).then((res) => {
+            alert("Your account has been successfully created!");
+            axios.post('api/login/', {
+                email: props.email,
+                password: props.password
+            }).then((res) => {
+                navigate('/dashboard');
+            }).catch((error) => {
+                console.log(error);
+                alert("There was an error during login: " + error.Message);
+                navigate('/');
+            })
+        }).catch((error) => {
+            console.error("There was an error completing the registration!", error);
+            alert("Registration failed. Please try again. Message: " + error.message);
+        })
     };
 
     return (
