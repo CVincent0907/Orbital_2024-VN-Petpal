@@ -13,3 +13,4 @@ urlpatterns = [
     # path('register_step_two/', register_step_two, name='register_step_two'),
     # path('register_step_three/', register_step_three, name='register_step_three'),
 ]
+
