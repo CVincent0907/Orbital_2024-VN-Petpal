@@ -21,10 +21,7 @@ const axiosInstance = axios.create({
     withCredentials: true,
     xsrfCookieName: 'csrftoken',
     xsrfHeaderName: 'X-CSRFToken',
-    withXSRFToken: true,
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-    }
+    withXSRFToken: true
 });
 
 axios.interceptors.request.use((config) => {
@@ -35,6 +32,8 @@ axios.interceptors.request.use((config) => {
         }
     };
     return modifiedConfig;
+}, (error) => {
+    return Promise.reject(error);
 });
 
 export default axiosInstance;
