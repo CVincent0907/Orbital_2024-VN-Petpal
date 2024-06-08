@@ -1,16 +1,11 @@
-import axios from "axios"; // Don't forget to import axios
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 
 import Address from "./Address";
 import Button from "./Button";
 import Country from "./Country";
 import Phone from "./Phone";
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
 export default function RegisterForm3(props) {
     const navigate = useNavigate();
@@ -30,7 +25,7 @@ export default function RegisterForm3(props) {
             alert("Please fill in all required fields.");
             return;
         }
-        axios.post('api/register/', {
+        axiosInstance.post('api/register/', {
             email: props.email,
             password: props.password,
             name: props.name,
@@ -46,7 +41,7 @@ export default function RegisterForm3(props) {
             phone_number: phone
         }).then((res) => {
             alert("Your account has been successfully created!");
-            axios.post('api/login/', {
+            axiosInstance.post('api/login/', {
                 email: props.email,
                 password: props.password
             }).then((res) => {

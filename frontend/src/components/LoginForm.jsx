@@ -1,14 +1,9 @@
 // Login.js
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Facebook from "../assets/Facebook icon (1).png";
 import Google from "../assets/Google icon.png";
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
+import axiosInstance from "../utils/axiosInstance";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -20,26 +15,7 @@ export default function Login() {
             alert("Please fill in both email and password fields.");
             return;
         }
-
-        // try {
-        //     const response = await axios.post('http://localhost:8000/api/login/', { 
-        //         email, 
-        //         password 
-        //     }, {
-        //         headers: {
-        //             'X-CSRFToken': getCSRFToken()
-        //         }
-        //     });
-        //     if (response.data.success) {
-        //         navigate("/dashboard");
-        //     } else {
-        //         alert(response.data.message);
-        //     }
-        // } catch (error) {
-        //     console.error("There was an error logging in!", error);
-        //     alert("Login failed. Please try again. Message: " + error.message);
-        // }
-        axios.post('/api/login/', {
+        axiosInstance.post('/api/login/', {
             email: email,
             password: password
         }).then((res) => {
@@ -75,19 +51,4 @@ export default function Login() {
             </section>
         </div>
     );
-}
-
-function getCSRFToken() {
-    let csrfToken = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, 10) === 'csrftoken=') {
-                csrfToken = decodeURIComponent(cookie.substring(10));
-                break;
-            }
-        }
-    }
-    return csrfToken;
 }
