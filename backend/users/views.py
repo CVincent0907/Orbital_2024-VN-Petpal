@@ -1,14 +1,10 @@
-# from django.views.decorators.csrf import csrf_exempt
-# from rest_framework.parsers import JSONParser
-# from .serializer import RegisterStepOneSerializer, RegisterStepTwoSerializer, RegisterStepThreeSerializer
 from django.contrib.auth import login, logout
 from rest_framework.authentication import SessionAuthentication
-# from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
 
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, EmailIsAvailableSerializer
+from .serializers import UserSerializer, UserLoginSerializer
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -16,7 +12,7 @@ class UserRegister(APIView):
     def post(self, request):
         # TODO: create validations to cleanup data
         data = request.data
-        serializer = UserRegisterSerializer(data=data)
+        serializer = UserSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data=data)
             if user:
@@ -53,11 +49,11 @@ class UserView(APIView):
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
 
-class EmailIsAvailable(APIView):
-    permission_classes = (permissions.AllowAny,)
+# class EmailIsAvailable(APIView):
+#     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, email):
-        serializer = EmailIsAvailableSerializer(email)
+#     def get(self, request, email):
+#         serializer = EmailIsAvailableSerializer(email)
         
-        is_available = serializer.is_available(email)
-        return Response({'is_available': is_available}, status=status.HTTP_200_OK)
+#         is_available = serializer.is_available(email)
+#         return Response({'is_available': is_available}, status=status.HTTP_200_OK)
