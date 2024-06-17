@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 
 from .serializers import UserSerializer, UserLoginSerializer, EmailIsAvailableSerializer
-from shelter.serializers import ShelterSerializer
+from shelters.serializers import ShelterSerializer
 from users.serializers import StdUserSerializer
 
 class UserRegister(APIView):

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import UserLogin, UserLogout, UserView, EmailIsAvailable
-from shelter.views import ShelterRegister
+from shelters.views import ShelterRegister
 from users.views import StdUserRegister
 
 urlpatterns = [
