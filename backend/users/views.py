@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
 
-from .serializers import UserSerializer, UserLoginSerializer
+from .serializers import UserSerializer, UserLoginSerializer, EmailIsAvailableSerializer
+from shelter.serializers import ShelterSerializer
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -30,7 +31,16 @@ class UserLogin(APIView):
         if serializer.is_valid():
             user = serializer.check_user(data)
             login(request, user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            response_data = {
+                'email': user.email,
+                'role': user.role,
+            }
+            if user.role == 'SHELTER':
+                shelter = user.shelter_data
+                if shelter:
+                    shelter_data = ShelterSerializer(shelter).data
+                    response_data['data'] = shelter_data
+            return Response(response_data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -46,14 +56,20 @@ class UserView(APIView):
 
     def get(self, request):
         serializer = UserSerializer(request.user)
-        return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+        response_data = {**serializer.data}
+        if request.user.role == 'SHELTER':
+            shelter = request.user.shelter_data
+            if shelter:
+                shelter_data = ShelterSerializer(shelter).data
+                response_data['data'] = shelter_data
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
-# class EmailIsAvailable(APIView):
-#     permission_classes = (permissions.AllowAny,)
+class EmailIsAvailable(APIView):
+    permission_classes = (permissions.AllowAny,)
 
-#     def get(self, request, email):
-#         serializer = EmailIsAvailableSerializer(email)
+    def get(self, request, role, email):
+        serializer = EmailIsAvailableSerializer(email=email, role=role)
         
-#         is_available = serializer.is_available(email)
-#         return Response({'is_available': is_available}, status=status.HTTP_200_OK)
+        is_available = serializer.is_available(email)
+        return Response({'is_available': is_available}, status=status.HTTP_200_OK)

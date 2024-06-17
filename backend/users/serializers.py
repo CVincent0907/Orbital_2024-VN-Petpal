@@ -8,8 +8,7 @@ UserModel = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        # fields = '__all__'
-        exclude = ('identifier',)
+        exclude = ('identifier', 'is_superuser', 'groups', 'user_permissions')
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, clean_data):
@@ -31,6 +30,15 @@ class UserLoginSerializer(serializers.Serializer):
         if not user:
             raise serializers.ValidationError('user not found')
         return user
+
+class EmailIsAvailableSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    role = serializers.CharField()
+
+    def is_available(self, email, role):
+        identifier = role[0] + "#" + email
+        user = UserModel.objects.filter(identifier=identifier)
+        return not user.exists()
 
 
 # class UserRegisterSerializer(serializers.ModelSerializer):
@@ -59,11 +67,3 @@ class UserLoginSerializer(serializers.Serializer):
 #     class Meta:
 #         model = UserModel
 #         exclude = ('password', 'groups', 'user_permissions', 'is_superuser', 'is_staff',)
-
-
-# class EmailIsAvailableSerializer(serializers.Serializer):
-#     email = serializers.EmailField()
-
-#     def is_available(self, email):
-#         user = UserModel.objects.filter(email=email)
-#         return not user.exists()

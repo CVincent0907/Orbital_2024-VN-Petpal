@@ -1,12 +1,12 @@
 # your_app/urls.py
 from django.urls import path
-from . import views
+from .views import UserLogin, UserLogout, UserView, EmailIsAvailable
+from shelter.views import ShelterRegister
 
 urlpatterns = [
-    path('register/', views.UserRegister.as_view(), name='register'),
-    path('login/', views.UserLogin.as_view(), name='login'),
-    path('logout/', views.UserLogout.as_view(), name='logout'),
-    path('user/', views.UserView.as_view(), name='user'),
-    # path('is-available/<str:email>', views.EmailIsAvailable.as_view(), name='check_email')
+    path('register/shelter/', ShelterRegister.as_view(), name='register'),
+    path('login/', UserLogin.as_view(), name='login'),
+    path('logout/', UserLogout.as_view(), name='logout'),
+    path('user/', UserView.as_view(), name='user'),
+    path('is-available/<str:role>/<str:email>/', EmailIsAvailable.as_view(), name='check-email')
 ]
-
