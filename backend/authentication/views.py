@@ -6,6 +6,7 @@ from rest_framework import permissions, status
 
 from .serializers import UserSerializer, UserLoginSerializer, EmailIsAvailableSerializer
 from shelter.serializers import ShelterSerializer
+from users.serializers import StdUserSerializer
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -62,6 +63,11 @@ class UserView(APIView):
             if shelter:
                 shelter_data = ShelterSerializer(shelter).data
                 response_data['data'] = shelter_data
+        elif request.user.role == 'USER':
+            user = request.user.user_data
+            if user:
+                user_data = StdUserSerializer(user).data
+                response_data['data'] = user_data
         return Response(response_data, status=status.HTTP_200_OK)
 
 

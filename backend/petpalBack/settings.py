@@ -50,8 +50,9 @@ INSTALLED_APPS = [
 
     # own
     'authentication',
-    'pets',
     'shelter',
+    'users',
+    'pets',
 ]
 
 MIDDLEWARE = [

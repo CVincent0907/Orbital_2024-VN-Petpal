@@ -1,20 +1,20 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from authentication.serializers import UserSerializer
-from .models import Shelter
+from .models import StdUser
 
 UserModel = get_user_model()
 
 
-class ShelterSerializer(serializers.ModelSerializer):
+class StdUserSerializer(serializers.ModelSerializer):
     account = UserSerializer()
 
     class Meta:
-        model = Shelter
-        fields = "__all__"
-
+        model = StdUser
+        fields = '__all__'
+    
     def create(self, validated_data):
         user_data = validated_data.pop('account')
         user = UserModel.objects.create_user(**user_data)
-        shelter = Shelter.objects.create(account=user, **validated_data)
-        return shelter
+        stdUser = StdUser.objects.create(account=user, **validated_data)
+        return stdUser
