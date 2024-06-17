@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # own
-    'users',
+    'authentication',
     'pets',
     'shelter',
 ]
@@ -144,7 +144,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'authentication.User'
 
 # csrf
 CSRF_COOKIE_NAME = 'csrftoken'

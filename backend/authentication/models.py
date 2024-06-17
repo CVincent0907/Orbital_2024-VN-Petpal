@@ -48,30 +48,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.identifier
-
-
-# class User(AbstractBaseUser, PermissionsMixin):
-#     id = models.AutoField(primary_key=True)
-#     email = models.EmailField(unique=True)
-#     password = models.CharField(max_length=255)
-#     name = models.CharField(max_length=255)
-#     description = models.TextField(blank=True)
-#     contact_email = models.EmailField(blank=True)
-    
-#     country = models.CharField(max_length=255, blank=True)
-#     street_1 = models.CharField(max_length=255, blank=True)
-#     street_2 = models.CharField(max_length=255, blank=True)
-#     postcode = models.CharField(max_length=20, blank=True)
-#     city = models.CharField(max_length=255, blank=True)
-#     state = models.CharField(max_length=255, blank=True)
-#     phone_number = models.CharField(max_length=20, blank=True)
-    
-#     date_joined = models.DateTimeField(auto_now_add=True)
-#     is_staff = models.BooleanField(default=False)
-
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = ['name', 'country', 'street_1', 'postcode', 'city', 'state']
-#     objects = UserManager()
-
-#     def __str__(self):
-#         return self.email
