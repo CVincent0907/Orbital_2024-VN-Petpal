@@ -33,3 +33,12 @@ class ShelterUpdate(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ShelterList(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request):
+        queryset = Shelter.objects.all()
+        serializer = ShelterSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
