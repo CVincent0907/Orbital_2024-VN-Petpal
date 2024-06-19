@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from addresses.models import Address
 
 UserModel = get_user_model()
 
@@ -12,11 +13,7 @@ class Shelter(models.Model):
     contact_email = models.EmailField(blank=True)
     
     country = models.CharField(max_length=255, blank=True)
-    street_1 = models.CharField(max_length=255, blank=True)
-    street_2 = models.CharField(max_length=255, blank=True)
-    postcode = models.CharField(max_length=20, blank=True)
-    city = models.CharField(max_length=255, blank=True)
-    state = models.CharField(max_length=255, blank=True)
+    address = models.ForeignKey(Address, on_delete=models.RESTRICT, null=True, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     
     date_joined = models.DateTimeField(auto_now_add=True)

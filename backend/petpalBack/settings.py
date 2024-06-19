@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # own
     'authentication',
+    'addresses',
     'shelters',
     'users',
     'pets',
