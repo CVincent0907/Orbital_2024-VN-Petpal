@@ -18,3 +18,10 @@ class StdUserSerializer(serializers.ModelSerializer):
         user = UserModel.objects.create_user(**user_data)
         stdUser = StdUser.objects.create(account=user, **validated_data)
         return stdUser
+    
+    def update(self, instance, validated_data):
+        instance.display_name = validated_data.get("display_name", instance.display_name)
+        instance.country = validated_data.get("country", instance.country)
+        instance.address = validated_data.get("address", instance.address)
+        instance.save()
+        return instance
