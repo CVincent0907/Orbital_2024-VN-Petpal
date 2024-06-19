@@ -41,6 +41,11 @@ class UserLogin(APIView):
                 if shelter:
                     shelter_data = ShelterSerializer(shelter).data
                     response_data['data'] = shelter_data
+            elif user.role == 'USER':
+                user = user.user_data
+                if user:
+                    user_data = StdUserSerializer(user).data
+                    response_data['data'] = user_data
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

@@ -36,3 +36,12 @@ class StdUserUpdate(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class StdUserList(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request):
+        queryset = StdUser.objects.all()
+        serializer = StdUserSerializer(queryset, many=True)
+        return Response({'users': serializer.data}, status=status.HTTP_200_OK)

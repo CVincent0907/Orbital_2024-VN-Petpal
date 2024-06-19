@@ -43,4 +43,4 @@ class ShelterList(APIView):
     def get(self, request):
         queryset = Shelter.objects.all()
         serializer = ShelterSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'shelters': serializer.data}, status=status.HTTP_200_OK)
