@@ -71,6 +71,15 @@ class UserView(APIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
 
+class UserDelete(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+
+    def delete(self, request):
+        request.user.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
 class EmailIsAvailable(APIView):
     permission_classes = (permissions.AllowAny,)
 

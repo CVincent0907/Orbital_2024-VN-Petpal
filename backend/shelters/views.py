@@ -1,6 +1,7 @@
 # from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication
 from rest_framework import permissions, status
 
 from .serializers import ShelterSerializer
@@ -19,6 +20,7 @@ class ShelterRegister(APIView):
 
 class ShelterUpdate(APIView):
     permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
 
     def put(self, request):
         account = request.user
