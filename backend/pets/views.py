@@ -15,7 +15,7 @@ class PetCreate(APIView):
     # Create permission group for shelter
 
     def post(self, request):
-        data = {'shelter': request.user.shelter_data.shelter_id, **request.data}
+        data = {'shelter_id': request.user.shelter_data.shelter_id, **request.data}
         serializer = PetSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -42,7 +42,7 @@ class PetList(APIView):
 
     def get(self, request, shelter_id=None):
         if shelter_id:
-            queryset = Pet.objects.filter(shelter=shelter_id)
+            queryset = Pet.objects.filter(shelter_id=shelter_id)
         else:
             queryset = Pet.objects.all()
         serializer = PetSerializer(queryset, many=True)
@@ -56,9 +56,11 @@ class PetUpdate(APIView):
     def put(self, request):
         try:
             pet = Pet.objects.get(pk=request.data['pet_id'])
+        except (KeyError):
+            return Response({"detail": "pet_id is required."}, status=status.HTTP_400_BAD_REQUEST)
         except (Pet.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
-        if pet.shelter == request.user.shelter_data:
+        if pet.shelter_id == request.user.shelter_data:
             data = request.data
             serializer = PetSerializer(instance=pet, data=data, partial=True)
             if pet and serializer.is_valid(raise_exception=True):
@@ -72,12 +74,14 @@ class PetDelete(APIView):
     permission_classes = (permissions.IsAuthenticated, IsShelter)
     authentication_classes = (SessionAuthentication,)
 
-    def post(self, request, pk):
+    def post(self, request):
         try:
-            pet = Pet.objects.get(pk=pk)
+            pet = Pet.objects.get(pk=request.data['pet_id'])
+        except (KeyError):
+            return Response({"detail": "pet_id is required."}, status=status.HTTP_400_BAD_REQUEST)
         except (Pet.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
-        if pet.shelter == request.user.shelter_data:
+        if pet.shelter_id == request.user.shelter_data:
             pet.delete()
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_403_FORBIDDEN)

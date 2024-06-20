@@ -35,6 +35,6 @@ class EmailIsAvailableSerializer(serializers.Serializer):
     role = serializers.CharField()
 
     def is_available(self, email, role):
-        identifier = role[0] + "#" + email
+        identifier = role[0].upper() + "#" + email
         user = UserModel.objects.filter(identifier=identifier)
         return not user.exists()

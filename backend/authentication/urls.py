@@ -8,7 +8,7 @@ urlpatterns = [
     path('register/user/', StdUserRegister.as_view(), name='user-register'),
     path('login/', UserLogin.as_view(), name='login'),
     path('logout/', UserLogout.as_view(), name='logout'),
-    path('user/', UserView.as_view(), name='user-detail'),
+    path('acc/', UserView.as_view(), name='user-detail'),
     path('delete/', UserDelete.as_view(), name='user-delete'),
     path('is-available/<str:role>/<str:email>/', EmailIsAvailable.as_view(), name='check-email')
 ]

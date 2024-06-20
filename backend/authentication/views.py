@@ -82,14 +82,17 @@ class UserDelete(APIView):
 
     def delete(self, request):
         request.user.delete()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class EmailIsAvailable(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, role, email):
-        serializer = EmailIsAvailableSerializer(email=email, role=role)
+        serializer = EmailIsAvailableSerializer(data = {
+            "email": email,
+            "role": role,
+        })
         
-        is_available = serializer.is_available(email)
+        is_available = serializer.is_available(email, role)
         return Response({'is_available': is_available}, status=status.HTTP_200_OK)

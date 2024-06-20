@@ -6,11 +6,6 @@ UserModel = get_user_model()
 
 
 class StdUser(models.Model):
-    TYPE_CHOICES = {
-        "DOG": "dog",
-        "CAT": "cat",
-    }
-
     user_id = models.AutoField(primary_key=True)
     account = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="user_data")
     display_name = models.CharField(max_length=255, blank=False)
