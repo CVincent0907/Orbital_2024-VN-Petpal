@@ -8,6 +8,8 @@ acquired on the first request from the browser to the server, and only origin
 Where full URLs are provided in responses they will be rendered as if service
 is running on 'http://127.0.0.1:8000'.
 
+Validation for address data is yet to be implemented.
+
 ## Open Endpoints
 
 Open endpoints require no Authentication.
@@ -52,4 +54,4 @@ Each endpoint manipulates or displays information related to pets.
 
 * [Create pet](pets/create.md) : `POST /api/pets/create/`
 * [Update info](pets/update.md) : `PUT /api/pets/update/`
-* [Delete pet](pets/delete.md) : `DELETE /api/pets/delete`
+* [Delete pet](pets/delete.md) : `DELETE /api/pets/delete/`

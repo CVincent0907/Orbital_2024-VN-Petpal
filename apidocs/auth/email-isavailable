@@ -1,0 +1,33 @@
+# Check Email Availability
+
+Check if the email provided has a registered account with the role.
+
+**URL** : `/api/auth/is-available/:role/:email/`
+
+**URL Parameters** : `role=[string], email=[string]` where `email` is the email that
+is checked for availability.
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Data constraints** : `{}`
+
+**URL Examples** 
+* `/api/auth/is-available/SHELTER/testing@gmail.com`
+* `api/auth/is-available/shelter/abc123@hotmail.com`
+* `api/auth/is-available/User/hello@gmail.com`
+
+## Response
+
+**Code** : `200 OK`
+
+**Content Example**
+
+```json
+{
+    "is_available": true
+}
+```
