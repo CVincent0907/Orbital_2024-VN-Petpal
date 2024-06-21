@@ -1,11 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
+body {
   box-sizing: border-box;
 }
-
-/* body {
-} */
 
 .navbar {
   background-color:black;
@@ -160,16 +155,16 @@ input::placeholder {
 }
 
 
-.content {
+.content1 {
   margin-bottom: 10px;
   padding: 20px;
 }
 
 .background-image {
-  background-image: url('./assets/side_image.png'); /* Replace with your image path */
-  background-size:cover; /* Cover the entire div */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* No repeat */
+  background-image: url('./assets/User&ShelterRegisterLoginIcon/side_image.png'); 
+  background-size:cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
   width:auto;
 }
 
@@ -201,14 +196,11 @@ input::placeholder {
 }
 
 .RegisterFormSection {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-left: 2rem;
+  margin-left: 30px;
 }
 
 .registerForm {
-  line-height: 35px;
+ line-height: 35px;
 }
 
 .description-area {
@@ -293,3 +285,49 @@ option {
   color: #828282;
 }
 
+.background-image1 {
+  background-image: url('./assets/User&ShelterRegisterLoginIcon/side_image.svg') ;
+  background-size:cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  width:auto;
+}
+
+.user-register-form1 {
+  margin-top: 30px;
+}
+
+
+
+.buttons-container {
+  height:10px;
+  display: flex;
+}
+
+.button-2 {
+    border-radius:8px;
+    color:white;
+    background-color: black;
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family:"Inter", sans-serif;
+    left: calc(50%); 
+}
+
+.button-1 {
+  border-radius:8px;
+  color:white;
+  background-color: black;
+  position: absolute;
+  width: 200px;
+  height: 70px;
+  bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  font-family:"Inter", sans-serif;
+  left: calc(27%); 
+}

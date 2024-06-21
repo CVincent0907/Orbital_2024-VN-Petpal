@@ -1,9 +1,9 @@
 // Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Facebook from "../assets/Facebook icon (1).png";
-import Google from "../assets/Google icon.png";
-import axiosInstance from "../utils/axiosInstance";
+import Facebook from "../../assets/User&ShelterRegisterLoginIcon/Facebook icon (1).png";
+import Google from "../../assets/User&ShelterRegisterLoginIcon/Google icon.png";
+import axiosInstance from "../../utils/axiosInstance";
 
 export default function Login() {
     const [email, setEmail] = useState("");

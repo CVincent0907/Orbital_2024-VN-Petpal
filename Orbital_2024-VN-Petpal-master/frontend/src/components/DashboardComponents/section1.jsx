@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Components/Button";
+import Button from "../User&ShelterRegisterLoginComponents/Button";
 import Particular_section1 from "./Particular_section1";
 import Particular_section2 from "./Particular_section2";
 import "./dashboard.css";

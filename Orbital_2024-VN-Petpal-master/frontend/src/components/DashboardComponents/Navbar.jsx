@@ -1,6 +1,6 @@
 import React from "react";
-import petpalSvg from "./DashboardIcon/PetPal logo.svg";
-import profilePicCircle from "./DashboardIcon/profile_pic.svg";
+import petpalSvg from "../../assets/DashboardIcon/PetPal logo.svg";
+import profilePicCircle from "../../assets/DashboardIcon/profile_pic.svg";
 import "./dashboard.css";
 
 export default function Navbar(props) {

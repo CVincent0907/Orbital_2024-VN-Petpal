@@ -1,5 +1,5 @@
 import React from "react";
-import edit from "./DashboardIcon/edit_icon.svg";
+import edit from "../../assets/DashboardIcon/edit_icon.svg";
 import PhotoUpload from "./PhotoUpload";
 
 export default function Particular_section1() {

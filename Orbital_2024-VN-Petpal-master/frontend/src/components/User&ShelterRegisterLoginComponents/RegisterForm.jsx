@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import RegisterForm1 from './RegisterForm1';
 import RegisterForm2 from './RegisterForm2';

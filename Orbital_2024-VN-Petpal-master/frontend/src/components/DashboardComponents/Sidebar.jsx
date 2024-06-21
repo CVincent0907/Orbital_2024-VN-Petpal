@@ -1,7 +1,7 @@
 import React from "react";
-import email from "./DashboardIcon/email_icon.svg";
-import img from "./DashboardIcon/image.svg";
-import customizeProfile from "./DashboardIcon/profile-circle-svgrepo-com 1.svg";
+import email from "../../assets/DashboardIcon/email_icon.svg";
+import img from "../../assets/DashboardIcon/image.svg";
+import customizeProfile from "../../assets/DashboardIcon/profile-circle-svgrepo-com 1.svg";
 import "./dashboard.css";
 
 export default function Sidebar() {

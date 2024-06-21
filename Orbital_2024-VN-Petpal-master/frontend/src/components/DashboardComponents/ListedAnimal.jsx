@@ -1,5 +1,5 @@
 import React from "react";
-import img from "./DashboardIcon/image.svg";
+import img from "../../assets/DashboardIcon/image.svg";
 import "./dashboard.css";
 
 
