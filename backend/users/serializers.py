@@ -12,6 +12,7 @@ UserModel = get_user_model()
 class StdUserSerializer(serializers.ModelSerializer):
     account = UserSerializer()
     address = AddressSerializer(required=False)
+    profile_pic = serializers.ImageField(read_only=True)
 
     class Meta:
         model = StdUser
@@ -45,3 +46,15 @@ class StdUserSerializer(serializers.ModelSerializer):
         else:
             instance.save()
         return instance
+
+
+class StdUserProfilePicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StdUser
+        fields = ('profile_pic',)
+
+    def update(self, instance, validated_data):
+        instance.profile_pic = validated_data.get("profile_pic", instance.profile_pic)
+        instance.save()
+        return instance
+

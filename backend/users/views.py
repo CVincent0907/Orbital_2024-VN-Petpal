@@ -1,10 +1,11 @@
 # from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import permissions, status
 
-from .serializers import StdUserSerializer
+from .serializers import StdUserSerializer, StdUserProfilePicSerializer
 from .models import StdUser
 
 
@@ -45,3 +46,24 @@ class StdUserList(APIView):
         queryset = StdUser.objects.all()
         serializer = StdUserSerializer(queryset, many=True)
         return Response({'users': serializer.data}, status=status.HTTP_200_OK)
+
+
+class StdUserUploadProfilePic(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+    parser_classes = (MultiPartParser, FormParser,)
+
+    def put(self, request, format=None):
+        account = request.user
+        user_id = account.user_data.user_id
+        try:
+            user = StdUser.objects.get(pk=user_id)
+        except StdUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = StdUserProfilePicSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            shelter_serializer = StdUserSerializer(user)
+            return Response(shelter_serializer.data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
