@@ -9,9 +9,10 @@ from addresses.serializers import AddressSerializer
 UserModel = get_user_model()
 
 
-class ShelterSerializer(serializers.ModelSerializer):
+class ShelterRegisterSerializer(serializers.ModelSerializer):
     account = UserSerializer()
     address = AddressSerializer(required=False)
+    profile_pic = serializers.ImageField(read_only=True)
 
     class Meta:
         model = Shelter
@@ -27,6 +28,16 @@ class ShelterSerializer(serializers.ModelSerializer):
         else:
             shelter = Shelter.objects.create(account=user, **validated_data)
         return shelter
+
+
+class ShelterSerializer(serializers.ModelSerializer):
+    account = UserSerializer(read_only=True)
+    address = AddressSerializer(required=False)
+    profile_pic = serializers.ImageField(read_only=True)
+
+    class Meta:
+        model = Shelter
+        fields = "__all__"
     
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
@@ -47,4 +58,15 @@ class ShelterSerializer(serializers.ModelSerializer):
                 pass
         else:
             instance.save()
+        return instance
+
+
+class ShelterProfilePicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Shelter
+        fields = ('profile_pic',)
+
+    def update(self, instance, validated_data):
+        instance.profile_pic = validated_data.get("profile_pic", instance.profile_pic)
+        instance.save()
         return instance
