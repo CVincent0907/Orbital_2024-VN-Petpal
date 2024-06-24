@@ -5,6 +5,8 @@ from addresses.models import Address
 UserModel = get_user_model()
 def upload_to(instance, filename):
     return f"shelters/{instance.account.email}/{filename}"
+def upload_images(instance, filename):
+    return f"shelters/{instance.shelter_id.account.email}/{filename}"
 
 class Shelter(models.Model):
     shelter_id = models.AutoField(primary_key=True)
@@ -22,3 +24,10 @@ class Shelter(models.Model):
 
     def __str__(self):
         return "Shelter" + self.shelter_id
+
+
+class ShelterImage(models.Model):
+    shelter_id = models.ForeignKey(Shelter, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to=upload_images)
+    description = models.TextField(blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)

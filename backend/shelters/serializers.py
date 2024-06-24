@@ -2,17 +2,24 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.db.models import RestrictedError
 from authentication.serializers import UserSerializer
-from .models import Shelter
+from .models import Shelter, ShelterImage
 from addresses.models import Address
 from addresses.serializers import AddressSerializer
 
 UserModel = get_user_model()
 
 
+class ShelterImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShelterImage
+        fields = '__all__'
+
+
 class ShelterRegisterSerializer(serializers.ModelSerializer):
     account = UserSerializer()
     address = AddressSerializer(required=False)
     profile_pic = serializers.ImageField(read_only=True)
+    images = ShelterImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Shelter
@@ -34,6 +41,7 @@ class ShelterSerializer(serializers.ModelSerializer):
     account = UserSerializer(read_only=True)
     address = AddressSerializer(required=False)
     profile_pic = serializers.ImageField(read_only=True)
+    images = ShelterImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Shelter

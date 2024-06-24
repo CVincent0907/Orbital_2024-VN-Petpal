@@ -5,7 +5,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import permissions, status
 
-from .serializers import ShelterSerializer, ShelterRegisterSerializer, ShelterProfilePicSerializer
+from .serializers import ShelterSerializer, ShelterRegisterSerializer, ShelterProfilePicSerializer, ShelterImageSerializer
 from .models import Shelter
 
 class ShelterRegister(APIView):
@@ -66,4 +66,20 @@ class ShelterUploadProfilePic(APIView):
             serializer.save()
             shelter_serializer = ShelterSerializer(shelter)
             return Response(shelter_serializer.data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ShelterUploadImage(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+    parser_classes = (MultiPartParser, FormParser,)
+
+    def post(self, request, format=None):
+        account = request.user
+        shelter_id = account.shelter_data.shelter_id
+        request.data['shelter_id'] = shelter_id
+        serializer = ShelterImageSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
