@@ -1,12 +1,17 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Pet
-
-UserModel = get_user_model()
+from .models import Pet, PetImage
 
 
 #TODO: Create, read, update, delete
+class PetImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PetImage
+        fields = '__all__'
+
+
 class PetSerializer(serializers.ModelSerializer):
+    images = PetImageSerializer(many=True, read_only=True)
+
     class Meta:
         model = Pet
         fields = '__all__'
