@@ -58,7 +58,9 @@ body {
     font-weight: 700;
 }
 
-
+.create-form {
+    width:auto;
+}
 
 .email_section,.profile_section {
     display: flex;
