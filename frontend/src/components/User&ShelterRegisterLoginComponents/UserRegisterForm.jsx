@@ -1,32 +1,68 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "./Button";
-import InputField from "./InputField";
+import axiosInstance from '../../utils/axiosInstance';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function UserRegisterForm(props) {
+import RegisterForm1 from "./UserRegisterForm1";
+import RegisterForm2 from "./UserRegisterForm2";
+
+
+export default function UserRegisterForm() {
     const navigate = useNavigate();
-    const [Email, setEmail] = useState(null);
-    const [Password, setPassword] = useState(null);
-    const [CPassword, setCPassword] = useState(null);
+    const [userData, setUserData] = useState({
+        display_name: "",
+        country: "",
+    });
+    const [account, setAccount] = useState({
+        email: "",
+        role: "USER",
+        password: "",
+    });
+    const [address, setAddress] = useState(null);
+    //     unit_number: "",
+    //     street_name: "",
+    //     address_line_1: "",
+    //     address_line_2: "",
+    //     region: "",
+    //     postcode: "",
+    //     city: "",
+    //     state: "",
+    //     country: "",
+    // }
 
-    const goToNextPage = (e) => {
-        navigate('/userregisterPage1')
-    }
+    const postData = async () => {
+        axiosInstance.post('api/auth/register/user/', {
+            account: account,
+            ...userData,
+            address: address
+        }).then((res) => {
+            alert("Your account has been successfully created!");
+            axiosInstance.post('api/auth/login/', account)
+            .then((res) => {
+                // TODO: handle data returned by storing it in a context
+                navigate('/dashboard');
+            }).catch((error) => {
+                console.log(error);
+                alert("There was an error during login: " + error.Message);
+                navigate('/login');
+            })
+        }).catch((error) => {
+            console.error("There was an error completing the registration!", error);
+            alert("Registration failed. Please try again. Message: " + error.message);
+        })
+    };
     
+    const [index, setIndex] = useState(1);
+    function next() {
+        setIndex((curr) => curr + 1);
+    }
+    function back() {
+        setIndex((curr) => curr - 1);
+    }
 
-    return (
-        <div>
-            <section className="RegisterFormSection">
-                <form className="registerForm">
-                    <InputField type="email" placeholder="Email" id="email" name="Email" autoFocus={true} change={(e) => setEmail(e.target.value)}/>
-                    <InputField type="password" placeholder="Password" id="password" name="Password" autoFocus={false} change={(e) => setPassword(e.target.value)}/>
-                    <label className="input-field-name" htmlFor="confirm-password">Confirm password:</label>
-                    <input type="password" placeholder="Password" id="confirm-password" name="Confirm password"  onChange={(e) => setCPassword(e.target.value)}/>
-                    <div>
-                        <Button className="next-button" name="Next" onClick={goToNextPage} />
-                    </div>
-                </form>
-            </section>
-        </div>
-    )
+    switch(index) {
+        case 1:
+            return <RegisterForm1 handleSubmit={next} setData={setAccount} />
+        case 2:
+            return <RegisterForm2 goBack={back} handleSubmit={postData} setData={setUserData} setAddress={setAddress} />;
+    }
 }

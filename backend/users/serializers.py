@@ -11,7 +11,7 @@ UserModel = get_user_model()
 
 class StdUserSerializer(serializers.ModelSerializer):
     account = UserSerializer()
-    address = AddressSerializer(required=False)
+    address = AddressSerializer(required=False, allow_null=True)
     profile_pic = serializers.ImageField(read_only=True)
 
     class Meta:

@@ -7,7 +7,7 @@ export default function Body() {
     const navigate = useNavigate();
 
     const onClick = (e) => {
-        navigate('/userregister')
+        navigate('/register')
     }
 
     return (

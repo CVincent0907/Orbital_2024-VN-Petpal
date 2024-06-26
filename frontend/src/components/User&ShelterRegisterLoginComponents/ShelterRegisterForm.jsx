@@ -7,7 +7,7 @@ import RegisterForm2 from './ShelterRegisterForm2';
 import RegisterForm3 from './ShelterRegisterForm3';
 
 
-export default function ShelterRegisterForm(props) {
+export default function ShelterRegisterForm() {
     const navigate = useNavigate()
     const [shelterData, setShelterData] = useState({
         name: "",
@@ -15,12 +15,12 @@ export default function ShelterRegisterForm(props) {
         contact_email: "",
         country: "",
         phone_number: "",
-    })
+    });
     const [account, setAccount] = useState({
         email: "",
         role: "SHELTER",
         password: "",
-    })
+    });
     const [address, setAddress] = useState({
         unit_number: "",
         street_name: "",
@@ -31,7 +31,7 @@ export default function ShelterRegisterForm(props) {
         city: "",
         state: "",
         country: "",
-    })
+    });
     
     // Post data to register endpoint of api, then attempt to login
     const postData = async () => {

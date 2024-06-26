@@ -24,7 +24,7 @@ export default function ShelterRegisterForm1({ handleSubmit, setData }) {
             return;
         }
 
-        const response = axiosInstance.get('/api/auth/is-available/SHELTER/' + Email, {
+        axiosInstance.get('/api/auth/is-available/SHELTER/' + Email, {
             withCredentials: false
         })
         .then((res) => {

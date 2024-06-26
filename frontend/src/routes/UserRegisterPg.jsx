@@ -10,7 +10,6 @@ export default function UserRegisterPg() {
             <div className="content1">
             <Navbar/>
             <Sign className= "signUp" action="up" id="User"/>
-            {/* <RegisterForm setUserId={props.setUserId}/> */}
             <UserRegisterForm/> </div>
             <div className="background-image1"></div>
             </div>

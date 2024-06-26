@@ -10,7 +10,7 @@ export default function ShelterLogin() {
                 <Navbar/>
                 <Sign className="signIn" action="in" id="Shelter"/>
                 <LoginForm role="SHELTER"/>
-                <Register link="/shelterregister" />
+                <Register link="/shelter/register" />
             </div>
     );
 }

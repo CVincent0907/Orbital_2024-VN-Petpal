@@ -7,7 +7,6 @@ export default function ShelterRegisterForm2({ handleSubmit, setData }) {
     const [Description, setDescription] = useState("");
     const [ContactEmail, setContactEmail] = useState("");
 
-    // TODO: handleSubmit
     const goToNextPage = async (e) => {
         e.preventDefault();
         if (Name === "") {

@@ -7,11 +7,11 @@ export default function Navbar() {
         const navigate = useNavigate();
 
         const onClick1 = (e) => {
-            navigate('/shelterlogin')
+            navigate('/shelter/login')
         }
 
         const onClick2 = (e) => {
-            navigate('/userlogin')
+            navigate('/login')
         }
 
         return (
