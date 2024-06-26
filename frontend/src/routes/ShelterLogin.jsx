@@ -4,12 +4,12 @@ import Navbar from "../components/User&ShelterRegisterLoginComponents/Navbar";
 import Register from "../components/User&ShelterRegisterLoginComponents/Register";
 import Sign from "../components/User&ShelterRegisterLoginComponents/Sign";
 
-export default function Home() {
+export default function ShelterLogin() {
     return (
             <div>
                 <Navbar/>
                 <Sign className="signIn" action="in" id="Shelter"/>
-                <LoginForm/>
+                <LoginForm role="SHELTER"/>
                 <Register link="/shelterregister" />
             </div>
     );

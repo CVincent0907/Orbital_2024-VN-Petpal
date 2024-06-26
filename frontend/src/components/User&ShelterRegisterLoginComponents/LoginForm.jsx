@@ -5,7 +5,7 @@ import Facebook from "../../assets/User&ShelterRegisterLoginIcon/Facebook icon (
 import Google from "../../assets/User&ShelterRegisterLoginIcon/Google icon.png";
 import axiosInstance from "../../utils/axiosInstance";
 
-export default function Login() {
+export default function Login({ role }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -15,9 +15,10 @@ export default function Login() {
             alert("Please fill in both email and password fields.");
             return;
         }
-        axiosInstance.post('/api/login/', {
+        axiosInstance.post('/api/auth/login/', {
             email: email,
-            password: password
+            password: password,
+            role: role
         }).then((res) => {
             navigate('/dashboard');
         }).catch((error) => {

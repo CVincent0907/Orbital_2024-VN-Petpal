@@ -9,7 +9,7 @@ export default function Home() {
             <div>
                 <Navbar/>
                 <Sign className="signIn" action="in" id="User"/>
-                <LoginForm/>
+                <LoginForm role="USER"/>
                 <Register link="/userregister"/></div>
     );
 }

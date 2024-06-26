@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "../components/User&ShelterRegisterLoginComponents/Navbar";
-import RegisterForm from "../components/User&ShelterRegisterLoginComponents/RegisterForm";
+import RegisterForm from "../components/User&ShelterRegisterLoginComponents/ShelterRegisterForm";
 import Sign from "../components/User&ShelterRegisterLoginComponents/Sign";
 
-export default function RegisterPg(props) {
+export default function ShelterRegister(props) {
     return (
         <div className="divider">
         <div className="content1">

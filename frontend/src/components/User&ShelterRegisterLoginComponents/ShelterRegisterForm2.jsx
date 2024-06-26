@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import Button from "./Button";
 import InputField from "./InputField";
 
-export default function RegisterForm2(props) {
+export default function ShelterRegisterForm2({ handleSubmit, setData }) {
     const [Name, setName] = useState("");
     const [Description, setDescription] = useState("");
     const [ContactEmail, setContactEmail] = useState("");
 
+    // TODO: handleSubmit
     const goToNextPage = async (e) => {
         e.preventDefault();
         if (Name === "") {
             alert("Please enter a name.");
             return;
-        }
-        props.setName(Name);
-        props.setDesc(Description);
-        props.setContactEmail(ContactEmail);
-        props.next();
+        };
+        setData((data) => ({
+            ...data,
+            name: Name,
+            description: Description,
+            contact_email: ContactEmail,
+        }));
+        handleSubmit();
     };
     
     return (

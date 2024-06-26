@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-
 import axiosInstance from "../../utils/axiosInstance";
 import Button from "./Button";
 import InputField from "./InputField";
 
-export default function RegisterForm1(props) {
+export default function ShelterRegisterForm1({ handleSubmit, setData }) {
     const emailre = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
     const [CPassword, setCPassword] = useState("");
@@ -26,14 +24,17 @@ export default function RegisterForm1(props) {
             return;
         }
 
-        const response = axiosInstance.get('/api/is-available/' + Email, {
+        const response = axiosInstance.get('/api/auth/is-available/SHELTER/' + Email, {
             withCredentials: false
         })
         .then((res) => {
             if (res.data.is_available) {
-                props.setEmail(Email);
-                props.setPassword(Password);
-                props.next();
+                setData((data) => ({
+                    ...data,
+                    email: Email,
+                    password: Password
+                }));
+                handleSubmit();
             } else {
                 alert("This email already has a registered account.");
                 return;
@@ -48,12 +49,12 @@ export default function RegisterForm1(props) {
     return (
         <div>
             <section className="RegisterFormSection">
-                <form className="registerForm">
+                <form className="registerForm" onSubmit={goToNextPage}>
                     <InputField type="email" placeholder="Email" id="email" name="Email" autoFocus={false} change={(e) => setEmail(e.target.value)}/>
                     <InputField type="password" placeholder="Password" id="password" name="Password" autoFocus={false} change={(e) => setPassword(e.target.value)}/>
                     <label className="input-field-name" htmlFor="confirm-password">Confirm password:</label>
                     <input type="password" placeholder="Password" id="confirm-password" name="Confirm password"  onChange={(e) => setCPassword(e.target.value)}/>
-                    <Button className="next-button" name="Next" onClick = {goToNextPage} />
+                    <Button className="next-button" name="Next" onClick={goToNextPage} />
                 </form>
             </section>
         </div>

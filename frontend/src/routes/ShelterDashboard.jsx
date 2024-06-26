@@ -5,7 +5,7 @@ import Navbar from "../components/DashboardComponents/Navbar";
 import Sidebar from "../components/DashboardComponents/Sidebar";
 import "../components/DashboardComponents/dashboard.css";
 
-export default function Dashboard() {
+export default function ShelterDashboard() {
     return (
         <div>
             <Navbar icon = {moreIcon} iconName={"more"} />
