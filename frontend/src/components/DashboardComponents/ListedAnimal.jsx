@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PetContext } from "../../utils/contexts/PetContext";
 import img from "../../assets/DashboardIcon/image.svg";
 import "./dashboard.css";
 
 
 export default function ListedAnimal() {
+    const petData = useContext(PetContext);
+
     return (
       <div className="card">
 
         <div className="listed_animal">
-            <img src={img} alt="Image"></img>
+            <img src={`http://127.0.0.1:8000${petData.avatar}`} alt="Image"></img>
             <div className="text_section">
-                <h2>&lt;name&gt;</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                laboris nisi ut aliquip ex ea commodo consequat.</p>         
+                <h2>{petData.name}</h2>
+                <p>{petData.description}</p>
             </div>       
         </div>
 
         <div className="card_bottom">
-          <h3>Age: &lt;age&gt;</h3>
-          <h3>Type: &lt;type&gt;</h3>
-          <h3>Breed: &lt;breed&gt;</h3>
+          <h3>Age: {petData.age}</h3>
+          <h3>Type: {petData.type}</h3>
+          <h3>Breed: {petData.breed}</h3>
         </div>
 
       </div>

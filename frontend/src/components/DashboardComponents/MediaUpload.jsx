@@ -94,7 +94,7 @@ export default function MediaUpload({ onChange }) {
         ref={fileInputRef}
         onChange={handleFileChange}
         style={{ display: 'none' }}
-        accept="image/*,video/*"
+        accept="image/*"
       />
     </div>
   );

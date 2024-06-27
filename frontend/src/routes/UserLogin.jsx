@@ -10,6 +10,6 @@ export default function Home() {
                 <Navbar/>
                 <Sign className="signIn" action="in" id="User"/>
                 <LoginForm role="USER"/>
-                <Register link="/userregister"/></div>
+                <Register link="/register"/></div>
     );
 }

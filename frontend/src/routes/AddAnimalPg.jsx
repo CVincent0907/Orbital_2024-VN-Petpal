@@ -9,7 +9,7 @@ import Section1 from "../components/DashboardComponents/section1";
 export default function AddAnimalPg() {
     const navigate = useNavigate();
     const onClick = () => {
-        navigate('/dashboard')
+        navigate('/shelter/dashboard');
     }
 
     return (

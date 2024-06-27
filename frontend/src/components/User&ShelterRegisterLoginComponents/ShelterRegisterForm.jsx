@@ -44,7 +44,7 @@ export default function ShelterRegisterForm() {
             axiosInstance.post('api/auth/login/', account)
             .then((res) => {
                 // TODO: handle data returned by storing it in a context
-                navigate('/dashboard');
+                navigate('/shelter/dashboard');
             }).catch((error) => {
                 console.log(error);
                 alert("There was an error during login: " + error.Message);

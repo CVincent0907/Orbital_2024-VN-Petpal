@@ -23,91 +23,75 @@
 
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 import Button from "../User&ShelterRegisterLoginComponents/Button";
 import Particular_section1 from "./Particular_section1";
 import Particular_section2 from "./Particular_section2";
 import "./dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Section1() {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
+    const [petData, setPetData] = useState({
         name: "",
+        avatar: null,
         description: "",
-        age: "",
         type: "",
         breed: "",
-        profilePhoto: null,
-        media: null
+        age: "",
     });
+    // image data sturcture: {image: <image.jpg>, description: ""}
+    const [images, setImages] = useState([]);
 
     const handleFormDataChange = (name, value) => {
-        setFormData({
-            ...formData,
+        setPetData((data) => ({
+            ...data,
             [name]: value
-        });
+        }));
     };
 
-    const handleProfilePhotoChange = (file) => {
-        setFormData({
-            ...formData,
-            profilePhoto: file
-        });
+    const handleAvatarChange = (file) => {
+        setPetData((data) => ({
+            ...data,
+            avatar: file
+        }));
     };
 
     const handleMediaChange = (file) => {
-        setFormData({
-            ...formData,
-            media: file
+        setImages((images) => {
+            images.push({
+                image: file,
+                description: "",
+            });
+            return images;
         });
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            alert("No authentication token found");
-            return;
-        }
-
-        const data = new FormData();
-        data.append("name", formData.name);
-        data.append("description", formData.description);
-        data.append("age", formData.age);
-        data.append("type", formData.type);
-        data.append("breed", formData.breed);
-        if (formData.profilePhoto) {
-            data.append("profilePhoto", formData.profilePhoto);
-        }
-        if (formData.media) {
-            data.append("media", formData.media);
-        }
-    
-        try {
-            
-            const response = await axios.post(
-                "http://127.0.0.1:8000/pets/create/",
-                data,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data"
-                    }
-                }
-            );
-            alert("Pet created successfully:", response.data);
-        } catch (error) {
-            alert("Error creating pet:", error.response);
-        }
-        
+        e.preventDefault();    
+        axiosInstance.postForm("/api/pets/create/", petData)
+        .then((res) => {
+            alert("Pet created successfully, uploading images...");
+            for (const image of images) {
+                axiosInstance.postForm(`/api/pets/add-photo/${res.data.pet_id}`, image)
+                .catch((error) => {
+                    alert("Error uploading photo:", error.message);
+                });
+            }
+        })
+        .then(() => {
+            navigate("/shelter/dashboard");
+        })
+        .catch((error) => {
+            alert("Error creating pet:", error.message);
+        });
     };
 
     return (
         <form className="create-form">
             <div>
-                <Particular_section1 onChange={handleFormDataChange} onProfilePhotoChange={handleProfilePhotoChange} />
+                <Particular_section1 onChange={handleFormDataChange} onProfilePhotoChange={handleAvatarChange} />
                 <hr className="particular_divider" />
                 <Particular_section2 onChange={handleMediaChange} />
                 <div className="button-section1">
