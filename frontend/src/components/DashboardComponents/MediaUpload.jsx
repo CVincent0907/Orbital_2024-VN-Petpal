@@ -25,17 +25,17 @@ export default function MediaUpload({ addFile, addMedia }) {
 
     return (
         <div className="profile-photo-upload">
-        <div className="image-upload" onClick={handleMediaClick}>
-            <div className="image-placeholder">+</div>
-        </div>
-        <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-            // TODO: handle videos
-            accept="image/*"
-        />
+            <div className="image-upload" onClick={handleMediaClick}>
+                <div className="image-placeholder">+</div>
+            </div>
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                // TODO: handle videos
+                accept="image/*"
+            />
         </div>
     );
 }

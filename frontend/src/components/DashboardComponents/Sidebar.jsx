@@ -11,22 +11,21 @@ export default function Sidebar() {
     return (
         <div className="sidenav">
 
-            <div className="photo_section">
-            <img src={shelterData.profile_pic} alt="photo"></img>
-            <h2>{shelterData.name}</h2>
+            <div className="sidenav-profilepic">
+                <img src={shelterData.profile_pic} alt="photo"></img>
+                <h2>{shelterData.name}</h2>
             </div>
 
-            <hr className="linebreak"/>
-
-            <div className="profile_section">
-                <img src={customizeProfile} alt='profile'></img>
-                <h2 className="point">Customize profile</h2>
-            </div>
-
-            <div className="email_section">
-                <img src={email} alt="email"></img>
-                <h2 className="point">Inbox</h2>
-            </div>
+            <ol className="sidenav-options-container">
+                <li className="sidenav-option">
+                    <img src={customizeProfile} alt='profile'></img>
+                    <p>Customize profile</p>
+                </li>
+                <li className="sidenav-option">
+                    <img src={email} alt="email"></img>
+                    <p>Inbox</p>
+                </li>
+            </ol>
         </div>
     )
 }

@@ -54,7 +54,6 @@ export default function Particular_section1({ onChange, onProfilePhotoChange }) 
                 <div className="particular_section">
                     <div>
                         <input
-                            id="Name"
                             name="name"
                             type="text"
                             placeholder="name"

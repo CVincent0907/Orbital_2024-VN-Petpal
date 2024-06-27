@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ShelterContext } from "../utils/contexts/ShelterContext"
 import moreIcon from "../assets/DashboardIcon/more_icon.svg";
-import Body from "../components/DashboardComponents/Body";
 import Navbar from "../components/DashboardComponents/Navbar";
 import Sidebar from "../components/DashboardComponents/Sidebar";
 import "../components/DashboardComponents/dashboard.css";
 import imagePlaceholder from "../assets/DashboardIcon/image_placeholder.svg"
 
+
 export default function ShelterDashboard() {
+    const navigate = useNavigate();
     const [shelterData, setShelterData] = useState({});
     const [completed, setCompleted] = useState(false);
+    // TODO: improve navbar icon handling
+    const [navbarInfo, setNavbarInfo] = useState({
+        title: "",
+        icon_src: moreIcon,
+        icon_alt: "more",
+        icon_onClick: () => {},
+    });
 
     useEffect(() => {
         document.title = "Dashboard";
@@ -23,6 +32,7 @@ export default function ShelterDashboard() {
                 profile_pic: profilePic,
             }))
             setCompleted(true);
+            navigate("list/");
         })
         .catch((error) => {
             alert("Error: " + error.Message)
@@ -38,10 +48,10 @@ export default function ShelterDashboard() {
     return (
         <ShelterContext.Provider value={shelterData}>
             <div>
-                <Navbar icon = {moreIcon} iconName={"more"} />
+                <Navbar info={navbarInfo} />
                 <div className="content">
-                    <Sidebar/>
-                    <Body/>
+                    <Sidebar />
+                    <Outlet context={{setNavbarInfo: setNavbarInfo}} />
                 </div>
             </div>
         </ShelterContext.Provider>
