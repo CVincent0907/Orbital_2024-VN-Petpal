@@ -18,7 +18,7 @@ class PetCreate(APIView):
     def post(self, request):
         data = request.data.copy()
         data['shelter_id'] = request.user.shelter_data.shelter_id
-        serializer = PetSerializer(data=data)
+        serializer = PetSerializer(data=data, context={'request': request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -34,7 +34,7 @@ class PetDetail(APIView):
         except (Pet.DoesNotExist):
             return Response(status=status.HTTP_404_NOT_FOUND)
         if pet:
-            serializer = PetSerializer(pet)
+            serializer = PetSerializer(pet, context={'request': request})
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -47,7 +47,7 @@ class PetList(APIView):
             queryset = Pet.objects.filter(shelter_id=shelter_id)
         else:
             queryset = Pet.objects.all()
-        serializer = PetSerializer(queryset, many=True)
+        serializer = PetSerializer(queryset, many=True, context={'request': request})
         return Response({'pets': serializer.data}, status=status.HTTP_200_OK)
 
 
@@ -64,7 +64,7 @@ class PetUpdate(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         if pet.shelter_id == request.user.shelter_data:
             data = request.data
-            serializer = PetSerializer(instance=pet, data=data, partial=True)
+            serializer = PetSerializer(instance=pet, data=data, context={'request': request}, partial=True)
             if pet and serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
@@ -100,7 +100,7 @@ class PetAddPhoto(APIView):
         if pet.shelter_id != request.user.shelter_data:
             return Response(status=status.HTTP_403_FORBIDDEN)
         request.data['pet_id'] = pet.pet_id
-        serializer = PetImageSerializer(data=request.data)
+        serializer = PetImageSerializer(data=request.data, context={'request': request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

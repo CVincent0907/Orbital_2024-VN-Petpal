@@ -13,7 +13,7 @@ class StdUserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        serializer = StdUserSerializer(data=request.data)
+        serializer = StdUserSerializer(data=request.data, context={'request': request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -32,7 +32,7 @@ class StdUserUpdate(APIView):
         except StdUser.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
-        serializer = StdUserSerializer(user, data=request.data, partial=True)
+        serializer = StdUserSerializer(user, data=request.data, context={'request': request}, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -44,7 +44,7 @@ class StdUserList(APIView):
 
     def get(self, request):
         queryset = StdUser.objects.all()
-        serializer = StdUserSerializer(queryset, many=True)
+        serializer = StdUserSerializer(queryset, many=True, context={'request': request})
         return Response({'users': serializer.data}, status=status.HTTP_200_OK)
 
 
@@ -64,6 +64,6 @@ class StdUserUploadProfilePic(APIView):
         serializer = StdUserProfilePicSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            shelter_serializer = StdUserSerializer(user)
-            return Response(shelter_serializer.data, status=status.HTTP_200_OK)
+            user_serializer = StdUserSerializer(user, context={'request': request})
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)

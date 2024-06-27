@@ -1,27 +1,3 @@
-// import React from "react";
-// import Button from "../User&ShelterRegisterLoginComponents/Button";
-// import Particular_section1 from "./Particular_section1";
-// import Particular_section2 from "./Particular_section2";
-// import "./dashboard.css";
-
-
-// export default function Section1() {
-   
-
-//     return (
-//         <div>
-//            <Particular_section1/>
-//            <hr className="particular_divider"/>
-//            <Particular_section2/>
-//            <div className="button-section1">
-//                 {/* Yet to add onClick to the button */}
-//                 <Button className={"done-button"} name={"Done"}></Button>
-//            </div>
-//         </div>
-//     )
-// }
-
-
 import React, { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import Button from "../User&ShelterRegisterLoginComponents/Button";
@@ -58,14 +34,14 @@ export default function Section1() {
         }));
     };
 
-    const handleMediaChange = (file) => {
-        setImages((images) => {
-            images.push({
+    const addImage = (file) => {
+        setImages((images) => [
+            ...images,
+            {
                 image: file,
-                description: "",
-            });
-            return images;
-        });
+                description: ""
+            }
+        ]);
     };
 
     const handleSubmit = async (e) => {
@@ -93,7 +69,7 @@ export default function Section1() {
             <div>
                 <Particular_section1 onChange={handleFormDataChange} onProfilePhotoChange={handleAvatarChange} />
                 <hr className="particular_divider" />
-                <Particular_section2 onChange={handleMediaChange} />
+                <Particular_section2 onChange={addImage} />
                 <div className="button-section1">
                     <Button className={"done-button"} name={"Done"} type="submit" onClick={handleSubmit}/>
                 </div>

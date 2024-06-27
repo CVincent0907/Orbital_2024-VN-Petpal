@@ -11,7 +11,7 @@ export default function ListedAnimal() {
       <div className="card">
 
         <div className="listed_animal">
-            <img src={`http://127.0.0.1:8000${petData.avatar}`} alt="Image"></img>
+            <img src={petData.avatar} alt="Image"></img>
             <div className="text_section">
                 <h2>{petData.name}</h2>
                 <p>{petData.description}</p>
