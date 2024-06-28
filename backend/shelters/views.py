@@ -12,12 +12,23 @@ class ShelterRegister(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        print(request.data)
         serializer = ShelterRegisterSerializer(data=request.data, context={'request': request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ShelterDetail(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, pk):
+        try:
+            shelter = Shelter.objects.get(pk=pk)
+        except (Shelter.DoesNotExist):
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ShelterSerializer(shelter, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ShelterUpdate(APIView):
