@@ -1,9 +1,11 @@
+/* TODO: create classes for icons */
+
 body {
   box-sizing: border-box;
 }
 
-.navbar {
-  /* background-color:black; */
+/* .navbar {
+  background-color:black;
   color: white;
   width: 245px;
   height: 85px;
@@ -12,7 +14,7 @@ body {
   display: flex;
   justify-content:left;
   gap:5px;
-}
+} */
 
 .paw {
   width: 60px;

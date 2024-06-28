@@ -20,7 +20,11 @@ export default function Login({ role }) {
             password: password,
             role: role
         }).then((res) => {
-            navigate('/shelter/dashboard');
+            if (role === "USER") {
+                navigate("/dashboard");
+            } else {
+                navigate('/shelter/dashboard');
+            }
         }).catch((error) => {
             alert("Error: " + error.message);
             console.log(error);

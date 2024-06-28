@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { PetContext } from "../../utils/contexts/PetContext";
 import "./dashboard.css";
 
 
 export default function ListedAnimal() {
+    const navigate = useNavigate();
     const petData = useContext(PetContext);
 
     const handleClick = (e) => {
-        return;
+        navigate(`../edit/${petData.pet_id}`);
     }
 
     return (
