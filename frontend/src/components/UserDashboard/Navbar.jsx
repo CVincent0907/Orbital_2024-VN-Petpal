@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { UserContext } from "../../utils/contexts/UserContext";
 import petpalLogo from "../../assets/PetPal-logo.svg";
 // import moreIcon from "../../assets/icons/more.svg";
-import "./userDashboard.css";
 
 
 export function Navbar() {

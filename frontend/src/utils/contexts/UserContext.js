@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export const UserContext = createContext({
-    shelter_id: 0,
+    user_id: 0,
     account: {
         account_id: 0,
         last_login: null,

@@ -40,7 +40,7 @@ class StdUserSerializer(serializers.ModelSerializer):
             instance.save()
             try:
                 old_address.delete()
-            except RestrictedError:
+            except (RestrictedError, AttributeError):
                 # Do nothing as the address is referenced by another account
                 pass
         else:

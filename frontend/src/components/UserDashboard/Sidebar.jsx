@@ -4,7 +4,6 @@ import pawIcon from "../../assets/icons/paw.svg";
 import shelterIcon from "../../assets/icons/house.svg";
 import chatIcon from "../../assets/icons/chat.svg";
 import profileIcon from "../../assets/icons/profile.svg";
-import "./userDashboard.css";
 
 
 export function Sidebar() {

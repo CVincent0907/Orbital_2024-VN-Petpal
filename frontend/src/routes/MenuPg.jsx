@@ -6,10 +6,10 @@ import Navbar from "../components/MenuPgComponents/Navbar";
 export default function MenuPg() {
 
     return (
-        <div>
+        <main className="menu-main">
             <Navbar/>
             <Body/>
-        </div>
+        </main>
     )
 
 }

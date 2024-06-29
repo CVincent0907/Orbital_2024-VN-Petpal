@@ -3,7 +3,6 @@ import axiosInstance from "../../utils/axiosInstance";
 import { PetContext } from "../../utils/contexts/PetContext";
 import { PetsListItem } from "./PetsListItem";
 import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
-import "./userDashboard.css";
 
 
 export function PetsList() {
@@ -17,7 +16,7 @@ export function PetsList() {
     }, []);
 
     return (
-        <ul className="petslist-container">
+        <ol className="petslist-container">
             {pets.length == 0
                 ? <p>No listed pets</p>
                 : pets.map((petData) => {
@@ -27,6 +26,6 @@ export function PetsList() {
                         </PetContext.Provider>);
                     })
             }
-        </ul>
+        </ol>
     )
 }

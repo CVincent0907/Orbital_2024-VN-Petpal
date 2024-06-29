@@ -11,19 +11,17 @@ export default function Body() {
     }
 
     return (
-        <div>
             <div className="menupgbody">
-                <div className="menupgheader">
+                <div className="menupgcontent">
                     <h1>Adopting pets</h1>
                     <h1>made easy</h1>
                     <List/>
+                    <button onClick={onClick} className="menupgregister">Register</button>
                 </div>
                 <div>
                     <img className="menupgimg" src={img}></img>
                 </div>
             </div>
-            <button onClick={onClick} className="menupgregister">Register</button>    
-        </div>
     )
 
 

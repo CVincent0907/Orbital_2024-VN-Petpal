@@ -1,4 +1,6 @@
-# PetPal API Documentation
+# PetPal API Documentation (OUTDATED)
+
+*Dear Nathan, pls update the api documentation!!! >:(*
 
 This is a documentation of PetPal's api, used mainly for development purposes.
 Most endpoints (all auth endpoints) require a valid csrftoken. A csrftoken is

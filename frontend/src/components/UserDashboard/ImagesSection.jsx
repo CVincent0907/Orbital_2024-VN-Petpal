@@ -1,5 +1,4 @@
 import React from "react";
-import "./userDashboard.css";
 
 
 export function ImagesSection({ images }) {

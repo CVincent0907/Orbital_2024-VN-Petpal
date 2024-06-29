@@ -5,24 +5,18 @@ import { UserContext } from "../utils/contexts/UserContext";
 import { Navbar } from "../components/UserDashboard/Navbar";
 import { Sidebar } from "../components/UserDashboard/Sidebar";
 import imagePlaceholder from "../assets/icons/image-placeholder.svg";
-import "../components/UserDashboard/userDashboard.css";
 
 export default function UserDashboard() {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({});
     const [completed, setCompleted] = useState(false);
+    const [render, setRender] = useState(false);
 
     useEffect(() => {
         document.title = "Dashboard";
         axiosInstance.get("api/auth/acc/")
         .then((res) => {
             setUserData(res.data.data);
-            if (!userData.profile_pic) {
-                setUserData((data) => ({
-                    ...data,
-                    profile_pic: imagePlaceholder,
-                }));
-            }
             setCompleted(true);
             navigate("pets");
         })
@@ -30,7 +24,11 @@ export default function UserDashboard() {
             alert("Error: " + error.Message)
             console.log(error)
         })
-    }, []);
+    }, [render]);
+
+    function Render() {
+        setRender((curr) => !curr);
+    }
 
     if (!completed) {
         return;
@@ -43,7 +41,7 @@ export default function UserDashboard() {
                     <Navbar />
                 </header>
                 <Sidebar />
-                <Outlet />
+                <Outlet context={{Render: Render}} />
             </main>
         </UserContext.Provider>
     )

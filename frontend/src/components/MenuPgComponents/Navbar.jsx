@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/DashboardIcon/PetPal logo.svg";
-import "./menustyle.css";
 
 export default function Navbar() {
         const navigate = useNavigate();

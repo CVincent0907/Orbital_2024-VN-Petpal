@@ -14,7 +14,7 @@ class UserRegister(APIView):
     def post(self, request):
         # TODO: create validations to cleanup data
         data = request.data
-        serializer = UserSerializer(data=data)
+        serializer = UserSerializer(data=data, context={'request': request})
         if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data=data)
             if user:
@@ -28,7 +28,7 @@ class UserLogin(APIView):
     def post(self, request):
         data = request.data
         # TODO: create validations to cleanup data
-        serializer = UserLoginSerializer(data=data)
+        serializer = UserLoginSerializer(data=data, context={'request': request})
         if serializer.is_valid():
             user = serializer.check_user(data)
             login(request, user)
@@ -39,12 +39,12 @@ class UserLogin(APIView):
             if user.role == 'SHELTER':
                 shelter = user.shelter_data
                 if shelter:
-                    shelter_data = ShelterSerializer(shelter).data
+                    shelter_data = ShelterSerializer(shelter, context={'request': request}).data
                     response_data['data'] = shelter_data
             elif user.role == 'USER':
                 user = user.user_data
                 if user:
-                    user_data = StdUserSerializer(user).data
+                    user_data = StdUserSerializer(user, context={'request': request}).data
                     response_data['data'] = user_data
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -61,17 +61,17 @@ class UserView(APIView):
     authentication_classes = (SessionAuthentication,)
 
     def get(self, request):
-        serializer = UserSerializer(request.user)
+        serializer = UserSerializer(request.user, context={'request': request})
         response_data = {**serializer.data}
         if request.user.role == 'SHELTER':
             shelter = request.user.shelter_data
             if shelter:
-                shelter_data = ShelterSerializer(shelter).data
+                shelter_data = ShelterSerializer(shelter, context={'request': request}).data
                 response_data['data'] = shelter_data
         elif request.user.role == 'USER':
             user = request.user.user_data
             if user:
-                user_data = StdUserSerializer(user).data
+                user_data = StdUserSerializer(user, context={'request': request}).data
                 response_data['data'] = user_data
         return Response(response_data, status=status.HTTP_200_OK)
 

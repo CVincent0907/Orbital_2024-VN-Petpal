@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./userDashboard.css";
 
 
 export function SidebarOption({ icon, label, url }) {

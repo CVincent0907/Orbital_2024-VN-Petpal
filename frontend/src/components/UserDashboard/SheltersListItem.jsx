@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
-import "./userDashboard.css";
+import locationIcon from "../../assets/icons/location.svg";
 
 
 export function SheltersListItem() {
@@ -22,7 +22,8 @@ export function SheltersListItem() {
                 </div>
             </div>
             <div className="shelterslist-item-bottom">
-                ...
+                <img src={locationIcon} alt="location icon" />
+                <p>{shelterData.country}</p>
             </div>
         </li>
     );

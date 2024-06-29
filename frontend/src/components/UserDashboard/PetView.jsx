@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { ImagesSection } from "./ImagesSection";
 import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
-import "./userDashboard.css";
 
 
 export function PetView() {
