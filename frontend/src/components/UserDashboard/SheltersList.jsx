@@ -9,6 +9,7 @@ export function SheltersList() {
     const [shelters, setShelters] = useState([]);
 
     useEffect(() => {
+        document.title = "Shelters"
         axiosInstance.get("api/shelters/list/")
         .then((res) => {
             setShelters(res.data.shelters);

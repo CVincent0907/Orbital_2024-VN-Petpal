@@ -9,6 +9,7 @@ export function PetsList() {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
+        document.title = "Pets"
         axiosInstance.get("api/pets/list/")
         .then((res) => {
             setPets(res.data.pets);

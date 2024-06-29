@@ -4,6 +4,8 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
 }
@@ -14,6 +16,11 @@
   --primary-text-color: #000;
   --secondary-text-color: #828282;
   --active-option-color: #a1a1a1;
+  --highlight-color: #1976D2;
+}
+
+li::marker {
+  content: "";
 }
 
 /* General ui */
@@ -67,6 +74,7 @@
 .btn-primary {
   background-color: black;
   padding: 1rem 2rem;
+  border: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: 1.5rem;
@@ -522,6 +530,7 @@ header {
 }
 
 .navbar {
+  /* position: fixed; */
   background-color: var(--secondary-color);
   border-bottom: 1px solid var(--secondary-text-color);
   padding: 0.5rem 2rem;
@@ -577,7 +586,7 @@ header {
 
 .petslist-container {
   width: 100%;
-  padding: 2rem 2rem 0;
+  padding: 2rem;
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
@@ -654,7 +663,7 @@ header {
   height: auto;
   object-fit: contain;
   aspect-ratio: 1 / 1;
-  max-width: 300px;
+  width: 300px;
   border-radius: 20px;
   border: 1px solid var(--secondary-text-color);
 }
@@ -687,14 +696,14 @@ header {
   height: auto;
   object-fit: contain;
   aspect-ratio: 1 / 1;
-  max-width: 300px;
+  width: 300px;
   border-radius: 20px;
   border: 1px solid var(--secondary-text-color);
 }
 
 .shelterslist-container {
   width: 100%;
-  padding: 2rem 2rem 0;
+  padding: 2rem;
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
@@ -766,4 +775,102 @@ header {
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
+}
+
+/* ShelterView */
+.shelterview-container {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+}
+
+.shelterview-profile {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.shelterview-profile-avatar {
+  flex-shrink: 0;
+  width: 300px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 20px;
+  border: 1px solid var(--secondary-text-color);
+}
+
+.shelterview-profile-desc {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+}
+
+.shelterview-profile-desc .horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.shelterview-profile-name {
+  font-size: 2.5rem;
+}
+
+.profile-description {
+  word-break: break-all;
+  color: var(--secondary-text-color);
+}
+
+.chat-button {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--highlight-color);
+  color: white;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.chat-button .chat-icon {
+  width: 35px;
+  height: auto;
+}
+
+.shelterview-gallery {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.shelterview-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shelterview-contact-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shelterview-contact-item img {
+  width: 40px;
+  height: auto;
+}
+
+.contact-address .contact-details p {
+  line-height: 1.5;
+}
+
+.shelterview-contact-item.contact-address {
+  align-items: flex-start;
 }

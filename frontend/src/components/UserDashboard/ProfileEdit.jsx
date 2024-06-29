@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { UserContext } from "../../utils/contexts/UserContext";
 import { ImageUpload } from "../ui/ImageUpload";
@@ -8,6 +8,10 @@ import { Address } from "../ui/Address";
 
 
 export function ProfileEdit() {
+    useEffect(() => {
+        document.title = "Edit Profile";
+    }, [])
+
     const [dataChanged, setDataChanged] = useState(false);
     const [avatarChanged, setAvatarChanged] = useState(false);
     const initUserData = useContext(UserContext);

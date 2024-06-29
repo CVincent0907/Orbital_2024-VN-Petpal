@@ -9,6 +9,7 @@ def upload_images(instance, filename):
     return f"shelters/{instance.shelter_id.account.email}/{filename}"
 
 class Shelter(models.Model):
+    # TODO: add link field
     shelter_id = models.AutoField(primary_key=True)
     account = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="shelter_data")
     name = models.CharField(max_length=255, blank=False)

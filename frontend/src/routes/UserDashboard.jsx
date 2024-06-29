@@ -4,7 +4,6 @@ import axiosInstance from "../utils/axiosInstance";
 import { UserContext } from "../utils/contexts/UserContext";
 import { Navbar } from "../components/UserDashboard/Navbar";
 import { Sidebar } from "../components/UserDashboard/Sidebar";
-import imagePlaceholder from "../assets/icons/image-placeholder.svg";
 
 export default function UserDashboard() {
     const navigate = useNavigate();

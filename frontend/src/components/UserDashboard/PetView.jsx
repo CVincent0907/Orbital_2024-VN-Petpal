@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { ImagesSection } from "./ImagesSection";
+import { SheltersListItem } from "./SheltersListItem";
+import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 
 
@@ -21,8 +23,22 @@ export function PetView() {
                     avatar: imagePlaceholder,
                 }));
             }
-            setCompleted(true);
-            document.title = `View Pet: ${petData.name}`;
+            axiosInstance.get(`/api/shelters/detail/${res.data.shelter_id}`)
+            .then((res) => {
+                setShelterData(res.data);
+                if (!res.data.profile_pic) {
+                    setShelterData((data) => ({
+                        ...data,
+                        profile_pic: imagePlaceholder,
+                    }));
+                }
+                setCompleted(true);
+                document.title = `View Pet: ${petData.name}`;
+            })
+            .catch((error) => {
+                alert("Error fetching shelter data: " + error.Message)
+                console.log(error)
+            });
         })
         .catch((error) => {
             alert("Error: " + error.Message)
@@ -60,7 +76,9 @@ export function PetView() {
             <hr />
             <div className="petview-body">
                 <h2>Shelter</h2>
-                <p>TODO: add shelter detail endpoint in backend before proceeding.</p>
+                <ShelterContext.Provider value={shelterData}>
+                    <SheltersListItem />
+                </ShelterContext.Provider>
             </div>
         </div>
     );
