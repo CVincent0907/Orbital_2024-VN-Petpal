@@ -5,7 +5,6 @@ import { ShelterContext } from "../utils/contexts/ShelterContext"
 import moreIcon from "../assets/DashboardIcon/more_icon.svg";
 import Navbar from "../components/DashboardComponents/Navbar";
 import Sidebar from "../components/DashboardComponents/Sidebar";
-import imagePlaceholder from "../assets/DashboardIcon/image_placeholder.svg"
 
 
 export default function ShelterDashboard() {
@@ -25,11 +24,6 @@ export default function ShelterDashboard() {
         axiosInstance.get("api/auth/acc/")
         .then((res) => {
             setShelterData(res.data.data);
-            const profilePic = shelterData.profile_pic ? shelterData.profile_pic : imagePlaceholder;
-            setShelterData((data) => ({
-                ...data,
-                profile_pic: profilePic,
-            }))
             setCompleted(true);
             navigate("list/");
         })

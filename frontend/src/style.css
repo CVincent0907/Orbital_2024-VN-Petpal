@@ -25,6 +25,14 @@ li::marker {
 }
 
 /* General ui */
+input {
+  width: 530px;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid black;
+  color:black;
+}
+
 .inputfield input {
   padding: 1rem;
   border-radius: 8px;
@@ -145,14 +153,6 @@ li::marker {
 
 form {
   width: 530px;
-}
-
-input {
-  width: 530px;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 2px solid black;
-  color:black;
 }
 
 .forgotPw {
@@ -320,11 +320,6 @@ option {
   font-weight: 500;
   font-family:"Inter", sans-serif;
   color: #828282;
-}
-
-.address {
-  line-height: 75px;
-  margin-bottom: 15px;
 }
 
 .postcode-city-field {
@@ -1189,4 +1184,77 @@ option {
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
+}
+
+/* ShelterEdit */
+.shelteredit-container {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+}
+
+.shelteredit-profile {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.shelteredit-profile-desc {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+}
+
+.shelteredit-profile-desc input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-color: var(--secondary-text-color);
+  font-size: 2rem;
+}
+
+.shelteredit-profile-desc input::placeholder {
+  font-size: inherit;
+}
+
+.shelteredit-description {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--secondary-text-color);
+  border-radius: 8px;
+  font-size: inherit;
+}
+
+/* ...Gallery Section to be added */
+
+.shelteredit-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shelteredit-contact-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shelteredit-contact-item img {
+  width: 40px;
+  height: auto;
+}
+
+.shelteredit-contact-item.address {
+  align-items: flex-start;
+}
+
+.shelteredit-address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

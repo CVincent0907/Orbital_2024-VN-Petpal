@@ -19,7 +19,7 @@ export function ProfileEdit() {
         display_name: initUserData.display_name,
         country: initUserData.country,
     });
-    const [address, setAddress] = useState(initUserData.address)
+    const [address, setAddress] = useState(initUserData.address);
     const [avatar, setAvatar] = useState(initUserData.profile_pic);
 
     // TODO: handle submit, add save button, style this shit
@@ -90,7 +90,7 @@ export function ProfileEdit() {
             <hr />
             <div className="profile-edit-location">
                 <h2>Location</h2>
-                <CountrySelectionField initCountry={userData.country ? userData.country : ""} setCountry={setCountry} />
+                <CountrySelectionField initCountry={userData.country} setCountry={setCountry} />
                 <Address initAddress={address} setAddress={(param) => {
                     setAddress(param);
                     setDataChanged(true);

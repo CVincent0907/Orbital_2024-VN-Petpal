@@ -20,6 +20,7 @@ import { PetEdit } from "./routes/PetEdit";
 import PetCreate from "./components/DashboardComponents/PetCreate";
 import { ListedAnimals } from "./components/DashboardComponents/ListedAnimals";
 import { ShelterEdit } from "./components/DashboardComponents/ShelterEdit";
+import { ShelterChats } from "./components/DashboardComponents/ShelterChats";
 
 export default function App() {
     return (
@@ -43,6 +44,7 @@ export default function App() {
                     <Route path="add" element={<PetCreate />} />
                     <Route path="edit/:id" element={<PetEdit />} />
                     <Route path="profile" element={<ShelterEdit />} />
+                    <Route path="chats" element={<ShelterChats />} />
                 </Route>
             </Route>
         </Routes>
