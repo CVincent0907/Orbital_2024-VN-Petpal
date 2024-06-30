@@ -35,8 +35,8 @@ export default function UserDashboard() {
 
     return (
         <UserContext.Provider value={userData}>
-            <main>
-                <header>
+            <main className="userdashboard-main">
+                <header className="userdashboard-header">
                     <Navbar />
                 </header>
                 <Sidebar />

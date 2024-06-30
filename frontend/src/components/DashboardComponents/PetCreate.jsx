@@ -5,7 +5,6 @@ import Button from "../User&ShelterRegisterLoginComponents/Button";
 import Particular_section1 from "./Particular_section1";
 import Particular_section2 from "./Particular_section2";
 import backIcon from "../../assets/DashboardIcon/back_icon.svg";
-import "./dashboard.css";
 
 
 export default function PetCreate() {
@@ -78,11 +77,9 @@ export default function PetCreate() {
     return (
         <form className="create-form">
             <Particular_section1 onChange={handleFormDataChange} onProfilePhotoChange={handleAvatarChange} />
-            <hr className="particular_divider" />
+            <hr />
             <Particular_section2 onChange={addImage} />
-            <div className="button-section1">
-                <Button className={"done-button"} name={"Done"} type="submit" onClick={handleSubmit}/>
-            </div>
+            <button className={"done-button"} name={"Done"} type="submit" onClick={handleSubmit}>Done</button>
         </form>
     );
 }

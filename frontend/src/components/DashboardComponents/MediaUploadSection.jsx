@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./dashboard.css";
 import MediaUpload from "./MediaUpload";
 
 

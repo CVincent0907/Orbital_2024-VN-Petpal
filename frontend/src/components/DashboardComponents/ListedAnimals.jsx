@@ -5,9 +5,7 @@ import { PetContext } from "../../utils/contexts/PetContext";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import ListedAnimal from "./ListedAnimal";
 import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
-import backIcon from "../../assets/DashboardIcon/back_icon.svg";
 import moreIcon from "../../assets/DashboardIcon/more_icon.svg";
-import "./dashboard.css";
 
 
 export function ListedAnimals() {
@@ -37,7 +35,7 @@ export function ListedAnimals() {
         <div className="listed-animals-container">
             <div className="listed-animals-header">
                 <h2 className="word">Listed animals</h2>
-                <button className="add_button" onClick={goToPetCreation} >+</button>
+                <button className="add_button" onClick={goToPetCreation}><p>+</p></button>
             </div> 
             <div className="listed-animals-list">
                 {pets.length == 0 

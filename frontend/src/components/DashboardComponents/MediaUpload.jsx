@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import './dashboard.css';
 
 export default function MediaUpload({ addFile, addMedia }) {
     const fileInputRef = useRef(null);

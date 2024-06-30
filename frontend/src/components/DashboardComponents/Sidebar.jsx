@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import email from "../../assets/DashboardIcon/email_icon.svg";
-import img from "../../assets/DashboardIcon/image.svg";
 import customizeProfile from "../../assets/DashboardIcon/profile-circle-svgrepo-com 1.svg";
-import "./dashboard.css";
+import pawIcon from "../../assets/icons/paw.svg";
+import { SidebarOption } from "./SidebarOption";
 
 export default function Sidebar() {
     const shelterData = useContext(ShelterContext);
@@ -17,14 +17,9 @@ export default function Sidebar() {
             </div>
 
             <ol className="sidenav-options-container">
-                <li className="sidenav-option">
-                    <img src={customizeProfile} alt='profile'></img>
-                    <p>Customize profile</p>
-                </li>
-                <li className="sidenav-option">
-                    <img src={email} alt="email"></img>
-                    <p>Inbox</p>
-                </li>
+                <SidebarOption icon={pawIcon} label="Listed animals" url="list" />
+                <SidebarOption icon={customizeProfile} label="Customize Profile" url="profile" />
+                <SidebarOption icon={email} label="Inbox" url="chats" />
             </ol>
         </div>
     )

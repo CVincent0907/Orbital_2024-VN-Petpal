@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import petpalSvg from "../../assets/DashboardIcon/PetPal logo.svg";
-import "./dashboard.css";
 
 export default function Navbar({ info }) {
     /* 
@@ -15,7 +14,7 @@ export default function Navbar({ info }) {
     const shelterData = useContext(ShelterContext);
     
     return (
-        <nav className="nav1">
+        <nav className="navbar">
                 <img className="side_icon" onClick= {info.icon_onClick} src={info.icon_src} alt={info.icon_alt}></img>
                 <img className="logo" src={petpalSvg} alt='petpal'></img>
                 <h1>{info.title}</h1>

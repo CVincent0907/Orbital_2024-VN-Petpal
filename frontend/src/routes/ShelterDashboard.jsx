@@ -5,7 +5,6 @@ import { ShelterContext } from "../utils/contexts/ShelterContext"
 import moreIcon from "../assets/DashboardIcon/more_icon.svg";
 import Navbar from "../components/DashboardComponents/Navbar";
 import Sidebar from "../components/DashboardComponents/Sidebar";
-import "../components/DashboardComponents/dashboard.css";
 import imagePlaceholder from "../assets/DashboardIcon/image_placeholder.svg"
 
 
@@ -47,13 +46,13 @@ export default function ShelterDashboard() {
 
     return (
         <ShelterContext.Provider value={shelterData}>
-            <div>
-                <Navbar info={navbarInfo} />
-                <div className="content">
-                    <Sidebar />
-                    <Outlet context={{setNavbarInfo: setNavbarInfo}} />
-                </div>
-            </div>
+            <main className="shelterdashboard-main">
+                <header className="shelterdashboard-header">
+                    <Navbar info={navbarInfo} />
+                </header>
+                <Sidebar />
+                <Outlet context={{setNavbarInfo: setNavbarInfo}} />
+            </main>
         </ShelterContext.Provider>
     )
 }
