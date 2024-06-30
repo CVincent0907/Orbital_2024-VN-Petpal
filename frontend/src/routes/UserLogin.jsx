@@ -6,10 +6,13 @@ import Sign from "../components/User&ShelterRegisterLoginComponents/Sign";
 
 export default function Home() {
     return (
-            <div>
-                <Navbar/>
+        <div className="login-main">
+            <Navbar/>
+            <div className="login-content">
                 <Sign className="signIn" action="in" id="User"/>
                 <LoginForm role="USER"/>
-                <Register link="/register"/></div>
+                <Register link="/register" />
+            </div>
+        </div>
     );
 }

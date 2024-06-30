@@ -40,11 +40,19 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
         handleSubmit();
     };
 
+    const handleSetCountry = (param) => {
+        setCountry(param);
+        setAddress((addr) => ({
+            ...addr,
+            country: param,
+        }));
+    }
+
     return (
         <div>
         <section className="RegisterFormSection">
             <form className="registerForm" onSubmit={Submit}>
-            <Country country={setCountry}/>
+            <Country country={handleSetCountry}/>
             {/* TODO: change handling of data with inputs */}
             <Address address1={setAddressLine1} address2={setAddressLine2} postcode={setPostcode} city={setCity} state={setState}/>
             <Phone phone={setPhone}/>

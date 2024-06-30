@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export function Address({ initAddress={}, setAddress, label=true }) {
+export function Address({ initAddress, setAddress, label=true }) {
     /* Address structure: {
         address_line_1: "",
         address_line_2: "",
@@ -12,6 +12,7 @@ export function Address({ initAddress={}, setAddress, label=true }) {
     }
     */
     
+    initAddress = initAddress ? initAddress : {};
     function handleChange(e, name) {
         setAddress((address) => ({
             ...address,
