@@ -28,7 +28,7 @@ export default function PetCreate() {
             icon_alt: "back",
             icon_onClick: () => {},
         })
-    })
+    }, [])
 
     const handleFormDataChange = (name, value) => {
         setPetData((data) => ({

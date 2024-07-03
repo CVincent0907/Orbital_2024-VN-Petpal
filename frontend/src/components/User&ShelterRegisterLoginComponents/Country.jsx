@@ -9,7 +9,7 @@ export default function Country(props) {
             <select className="select-country" id="country" name="country" onChange={(e) => props.country(e.target.value)}required>
                 <option value="" disabled selected>Select</option>
                 <option value="SG">Singapore</option>
-                {/*<option value="MY">Malaysia</option>*/}
+                <option value="MY">Malaysia</option>
             </select>
             </div>
         </div>   

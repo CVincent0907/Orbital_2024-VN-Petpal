@@ -50,6 +50,7 @@ export default function Particular_section1({ onChange, onProfilePhotoChange }) 
                         <option value="">Select Type</option>
                         <option value="DOG">Dog</option>
                         <option value="CAT">Cat</option>
+                        <option value="PARROT">Parrot</option>
                         {/* Add more options as needed */}
                     </select>
                 </div>

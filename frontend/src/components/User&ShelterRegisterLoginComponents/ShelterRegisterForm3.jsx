@@ -19,7 +19,7 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
 
     const Submit = async (e) => {
         e.preventDefault();
-        if (!(country && addressLine1 && postcode && city && state)) {
+        if (!country) {
             alert("Please fill in all required fields.");
             return;
         }
