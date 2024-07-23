@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from shortuuid.django_fields import ShortUUIDField
 from addresses.models import Address
 
 UserModel = get_user_model()
@@ -10,7 +11,7 @@ def upload_images(instance, filename):
 
 class Shelter(models.Model):
     # TODO: add link field
-    shelter_id = models.AutoField(primary_key=True)
+    shelter_id = ShortUUIDField(primary_key=True, length=15)
     account = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="shelter_data")
     name = models.CharField(max_length=255, blank=False)
     description = models.TextField(blank=True)

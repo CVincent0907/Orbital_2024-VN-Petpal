@@ -1,4 +1,5 @@
 from django.db import models
+from shortuuid.django_fields import ShortUUIDField
 from shelters.models import Shelter
 
 def upload_to(instance, filename):
@@ -8,7 +9,7 @@ def upload_avatar(instance, filename):
 
 class Pet(models.Model):
     # auto fields
-    pet_id = models.AutoField(primary_key=True)
+    pet_id = ShortUUIDField(primary_key=True, length=15)
     date_added = models.DateTimeField(auto_now_add=True)
     shelter_id = models.ForeignKey(Shelter, related_name='pet', on_delete=models.CASCADE)
 

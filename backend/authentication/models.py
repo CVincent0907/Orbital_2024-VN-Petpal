@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from shortuuid.django_fields import ShortUUIDField
 
 class UserManager(BaseUserManager):
     def create_user(self, identifier=None, password=None, email=None, role="USER"):
@@ -33,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         "USER": "user",
     }
 
-    account_id = models.AutoField(primary_key=True)
+    account_id = ShortUUIDField(primary_key=True, length=15)
     identifier = models.CharField(max_length=256, unique=True) # email prefixed with a letter based on acc role
     password = models.CharField(max_length=255)
     email = models.EmailField()

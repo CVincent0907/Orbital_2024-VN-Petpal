@@ -38,6 +38,7 @@ CSRF_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     # third-party
     'rest_framework',
     'corsheaders',
+    'channels',
 
     # own
     'authentication',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'shelters',
     'users',
     'pets',
+    # 'chat',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +89,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'petpalBack.wsgi.application'
+# WSGI_APPLICATION = 'petpalBack.wsgi.application'
+
+ASGI_APPLICATION = 'petpalBack.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -176,4 +181,11 @@ CORS_ALLOW_CREDENTIALS = True
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication',),
+}
+
+# channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
 }

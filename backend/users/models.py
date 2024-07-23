@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from shortuuid.django_fields import ShortUUIDField
 from addresses.models import Address
 
 UserModel = get_user_model()
@@ -7,7 +8,7 @@ def upload_to(instance, filename):
     return f"users/{instance.account.email}/{filename}"
 
 class StdUser(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    user_id = ShortUUIDField(primary_key=True, length=15)
     account = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="user_data")
     display_name = models.CharField(max_length=255, blank=False)
     profile_pic = models.ImageField(upload_to=upload_to, null=True, blank=True)
