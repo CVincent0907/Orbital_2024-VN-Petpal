@@ -12,7 +12,7 @@ import { PetsList } from "./components/UserDashboard/PetsList";
 import { PetView } from "./components/UserDashboard/PetView";
 import { SheltersList } from "./components/UserDashboard/SheltersList";
 import { ShelterView } from "./components/UserDashboard/ShelterView";
-import { Chats as UserChats } from "./components/UserDashboard/Chats";
+import { Chats as UserChats } from "./components/UserDashboard/Chats/Chats";
 import { ProfileEdit } from "./components/UserDashboard/ProfileEdit";
 // ShelterDashboard
 import ShelterDashboard from "./routes/ShelterDashboard";
@@ -33,7 +33,7 @@ export default function App() {
                 <Route path="pets/:id" element={<PetView />} />
                 <Route path="shelters" element={<SheltersList />} />
                 <Route path="shelters/:id" element={<ShelterView />} />
-                <Route path="chats" element={<UserChats />} />
+                <Route path="chats/*" element={<UserChats />} />
                 <Route path="profile" element={<ProfileEdit />} />
             </Route>
             <Route path="/shelter">

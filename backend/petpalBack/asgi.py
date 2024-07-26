@@ -14,11 +14,11 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from channels.auth import AuthMiddlewareStack
 
-from chat import routing
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'petpalBack.settings')
 
 django_asgi_app = get_asgi_application()
+
+from chat import routing
 
 application = ProtocolTypeRouter({
     "http": django_asgi_app,

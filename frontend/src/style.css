@@ -1266,3 +1266,13 @@ option {
   flex-direction: column;
   gap: 0.5rem;
 }
+
+/* UserChats */
+.chat-container {
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+.chat-container * {
+  border: 1px solid #000;
+}
