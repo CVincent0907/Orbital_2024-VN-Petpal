@@ -28,6 +28,10 @@ li::marker {
 }
 
 /* General ui */
+textarea {
+  resize: none;
+}
+
 input {
   width: 530px;
   padding: 1rem;
