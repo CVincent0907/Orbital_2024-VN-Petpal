@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
+import { Address } from "../ui/Address";
+import { CountrySelectionField } from "../ui/CountrySelectionField";
 import { ImageUpload } from "../ui/ImageUpload";
 import { InputField } from "../ui/InputField";
-import { CountrySelectionField } from "../ui/CountrySelectionField";
-import { Address } from "../ui/Address";
 
 import Email from "../../assets/icons/email.svg";
-import Link from "../../assets/icons/link.svg";
 import Location from "../../assets/icons/location.svg";
 import Phone from "../../assets/icons/phone.svg";
 
-
 export function ShelterEdit() {
     useEffect(() => {
+        // Set the document title to "Edit Profile"
         document.title = "Edit Profile";
     }, []);
-    const [dataChanged, setDataChanged] = useState(false);
-    const [avatarChanged, setAvatarChanged] = useState(false);
-    const initShelterData = useContext(ShelterContext);
+
+    const [dataChanged, setDataChanged] = useState(false); // Tracks if any data has changed
+    const [avatarChanged, setAvatarChanged] = useState(false); // Tracks if the avatar has changed
+    const initShelterData = useContext(ShelterContext); // Get initial shelter data from context
+
     const [shelterData, setShelterData] = useState({
         name: initShelterData.name,
         description: initShelterData.description,
@@ -26,10 +27,11 @@ export function ShelterEdit() {
         country: initShelterData.country,
         phone_number: initShelterData.phone_number,
     });
-    // const [images, setImages] = useState(initShelterData.images);
+
     const [address, setAddress] = useState(initShelterData.address);
     const [avatar, setAvatar] = useState(initShelterData.profile_pic);
 
+    // Update shelter data and mark it as changed
     const setParticularData = (name, value) => {
         setShelterData((data) => ({
             ...data,
@@ -38,6 +40,7 @@ export function ShelterEdit() {
         setDataChanged(true);
     };
 
+    // Update country and address, and mark data as changed
     const setCountry = (value) => {
         setShelterData((data) => ({
             ...data,
@@ -46,10 +49,11 @@ export function ShelterEdit() {
         setAddress((addr) => ({
             ...addr,
             country: value,
-        }))
+        }));
         setDataChanged(true);
-    }
+    };
 
+    // Handle form submission to update shelter data and avatar
     function handleSubmit() {
         if (dataChanged) {
             axiosInstance.put("/api/shelters/update/", {
@@ -61,7 +65,7 @@ export function ShelterEdit() {
                 setDataChanged(false);
             })
             .catch((err) => {
-                alert("An error occured during update");
+                alert("An error occurred during update");
                 console.error(err.message);
             });
         }
@@ -72,11 +76,11 @@ export function ShelterEdit() {
                 },
             })
             .then((res) => {
-                alert("profile pic updated");
+                alert("Profile pic updated");
                 setAvatarChanged(false);
             })
             .catch((err) => {
-                alert("An error occured during update");
+                alert("An error occurred during update");
                 console.error(err.message);
             });
         }
@@ -85,9 +89,12 @@ export function ShelterEdit() {
     return (
         <form className="shelteredit-container">
             <div className="shelteredit-profile">
+                {/* Image upload component for profile picture */}
                 <ImageUpload initImage={avatar} onChange={(file) => {setAvatar(file); setAvatarChanged(true);}} />
                 <div className="shelteredit-profile-desc">
+                    {/* Input field for shelter name */}
                     <InputField value={shelterData.name} placeholder="Name" onChange={(e) => {setParticularData("name", e.target.value);}} />
+                    {/* Textarea for shelter description */}
                     <textarea className="shelteredit-description" value={shelterData.description} placeholder="Description" onChange={(e) => {setParticularData("description", e.target.value);}} />
                 </div>
             </div>
@@ -101,23 +108,24 @@ export function ShelterEdit() {
                 <div className="shelteredit-contact-item address">
                     <img className="contact-icon" src={Location} alt="location icon" />
                     <div className="shelteredit-address">
+                        {/* Address component */}
                         <Address label={false} initAddress={address} setAddress={(param) => {setAddress(param); setDataChanged(true);}} />
+                        {/* Country selection field */}
                         <CountrySelectionField label={false} initCountry={shelterData.country} setCountry={setCountry} />
                     </div>
                 </div>
-                {/* <div className="shelteredit-contact-item">
-                    <img className="contact-icon" src={Link} alt="web-link icon" />
-                    <InputField value={shelterData.link} placeholder="Link" onChange={(e) => {setParticularData("link", e.target.value);}} />
-                </div> */}
+                {/* Contact email input field */}
                 <div className="shelteredit-contact-item">
                     <img className="contact-icon" src={Email} alt="email icon" />
                     <InputField type="email" value={shelterData.contact_email} placeholder="Contact email" onChange={(e) => {setParticularData("contact_email", e.target.value);}} />
                 </div>
+                {/* Phone number input field */}
                 <div className="shelteredit-contact-item">
                     <img className="contact-icon" src={Phone} alt="phone icon" />
                     <InputField type="tel" value={shelterData.phone_number} placeholder="Phone number" onChange={(e) => {setParticularData("phone_number", e.target.value);}} />
                 </div>
             </div>
+            {/* Show save button only if data or avatar has changed */}
             {(dataChanged || avatarChanged) && <button type="submit" className="btn-primary floating--bottom-right" onClick={handleSubmit}>Save</button>}
         </form>
     );
