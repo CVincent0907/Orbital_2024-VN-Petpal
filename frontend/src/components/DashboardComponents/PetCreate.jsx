@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axiosInstance from "../../utils/axiosInstance";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import Button from "../User&ShelterRegisterLoginComponents/Button";
+import backIcon from "../../assets/DashboardIcon/back_icon.svg";
+import axiosInstance from "../../utils/axiosInstance";
 import Particular_section1 from "./Particular_section1";
 import Particular_section2 from "./Particular_section2";
-import backIcon from "../../assets/DashboardIcon/back_icon.svg";
-
 
 export default function PetCreate() {
     const navigate = useNavigate();
@@ -18,18 +16,20 @@ export default function PetCreate() {
         breed: "",
         age: "",
     });
-    // image data sturcture: {image: <image.jpg>, description: ""}
+    // Image data structure: {image: <image.jpg>, description: ""}
     const [images, setImages] = useState([]);
 
     useEffect(() => {
+        // Set the navigation bar information
         setNavbarInfo({
             title: "Add animal listing",
             icon_src: backIcon,
             icon_alt: "back",
-            icon_onClick: () => {},
-        })
-    }, [])
+            icon_onClick: () => navigate(-1), // Go back on clicking the back icon
+        });
+    }, [setNavbarInfo, navigate]);
 
+    // Handle changes to the form data
     const handleFormDataChange = (name, value) => {
         setPetData((data) => ({
             ...data,
@@ -37,6 +37,7 @@ export default function PetCreate() {
         }));
     };
 
+    // Handle changes to the avatar image
     const handleAvatarChange = (file) => {
         setPetData((data) => ({
             ...data,
@@ -44,6 +45,7 @@ export default function PetCreate() {
         }));
     };
 
+    // Add a new image to the images array
     const addImage = (file) => {
         setImages((images) => [
             ...images,
@@ -54,6 +56,7 @@ export default function PetCreate() {
         ]);
     };
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();    
         axiosInstance.postForm("/api/pets/create/", petData)

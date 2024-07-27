@@ -21,10 +21,9 @@ export function Navbar() {
     const handleConfirm = async () => {
         axiosInstance.post('/api/auth/logout/')
         .then((res) => {
-          // Assuming logout is successful
           alert(`Logout successful! Response data: ${JSON.stringify(res.data)}`);
-          // Navigate to the appropriate page after logout
-          navigate('/'); // Adjust the route as needed
+          // Navigate to homepage after logout
+          navigate('/'); 
         })
         .catch((error) => {
           alert("Error: " + error.message);

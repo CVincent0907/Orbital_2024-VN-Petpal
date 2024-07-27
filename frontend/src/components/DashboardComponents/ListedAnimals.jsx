@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import moreIcon from "../../assets/DashboardIcon/more_icon.svg";
+import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
+import axiosInstance from "../../utils/axiosInstance";
 import { PetContext } from "../../utils/contexts/PetContext";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import ListedAnimal from "./ListedAnimal";
-import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
-import moreIcon from "../../assets/DashboardIcon/more_icon.svg";
-
 
 export function ListedAnimals() {
     const navigate = useNavigate();
@@ -15,18 +14,22 @@ export function ListedAnimals() {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
+        // Set the navigation bar information
         setNavbarInfo({
             title: "",
             icon_src: moreIcon,
             icon_alt: "more",
             icon_onClick: () => {},
-        })
+        });
+        
+        // Fetch the list of pets from the shelter
         axiosInstance.get("api/pets/list/" + shelterData.shelter_id)
         .then((res) => {
             setPets(res.data.pets);
-        })
+        });
     }, []);
 
+    // Navigate to the pet creation page
     function goToPetCreation() {
         navigate('/shelter/dashboard/add/');
     }
@@ -38,14 +41,17 @@ export function ListedAnimals() {
                 <button className="add_button" onClick={goToPetCreation}><p>+</p></button>
             </div> 
             <div className="listed-animals-list">
-                {pets.length == 0 
-                ? <p>No listed animals.</p>
+                {pets.length === 0 
+                ? <p>No listed animals.</p> // Show message if no pets are listed
                 : pets.map((petData) => {
+                        // Use placeholder image if pet has no avatar
                         const avatar = petData.avatar ? petData.avatar : imagePlaceholder;
-                        return (<PetContext.Provider value={{...petData, avatar: avatar}}>
+                        return (
+                            <PetContext.Provider value={{...petData, avatar: avatar}}>
                                 <ListedAnimal />
-                            </PetContext.Provider>);
-                        })
+                            </PetContext.Provider>
+                        );
+                    })
                 }
             </div>
         </div>
