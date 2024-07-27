@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import MenuPg from "./routes/MenuPg";
 import ShelterRegister from "./routes/ShelterRegister";
@@ -47,6 +47,7 @@ export default function App() {
                     <Route path="chats" element={<ShelterChats />} />
                 </Route>
             </Route>
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     );
 }

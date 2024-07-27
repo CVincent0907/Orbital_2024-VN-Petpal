@@ -3,6 +3,7 @@ from asgiref.sync import async_to_sync
 from django.contrib.auth import get_user_model
 import json
 from .models import ChatMessage
+from .serializers import ChatMessageSerializer
 UserModel = get_user_model()
 
 class ChatConsumer(WebsocketConsumer):
@@ -30,4 +31,5 @@ class ChatConsumer(WebsocketConsumer):
     
     def send_message(self, event):
         message = event['message']
-        self.send(text_data=json.dumps({'message': message}))
+        serializer = ChatMessageSerializer(message)
+        self.send(text_data=json.dumps(serializer.data))

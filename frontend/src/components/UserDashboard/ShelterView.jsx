@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { ImagesDisplay } from '../ui/ImagesDisplay';
 import Chat from "../../assets/icons/chat.svg";
@@ -12,6 +12,7 @@ import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 
 export function ShelterView() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [shelterData, setShelterData] = useState({});
     const [completed, setCompleted] = useState(false);
 
@@ -44,7 +45,7 @@ export function ShelterView() {
                 <div className="shelterview-profile-desc">
                     <div className="horizontal">
                         <h1 className="shelterview-profile-name">{shelterData.name}</h1>
-                        <button className="chat-button">
+                        <button className="chat-button" onClick={() => navigate(`/dashboard/chats/${shelterData.account.account_id}`)}>
                             <img className='chat-icon' src={Chat} alt="Chat icon" />
                             Chat
                         </button>

@@ -21,7 +21,7 @@ export default function Login({ role }) {
             role: role
         }).then((res) => {
             if (role === "USER") {
-                navigate("/dashboard");
+                navigate("/dashboard/pets");
             } else {
                 navigate('/shelter/dashboard');
             }

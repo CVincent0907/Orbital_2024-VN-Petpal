@@ -7,10 +7,16 @@ from .models import ChatMessage
 @receiver(post_save, sender=ChatMessage)
 def message_created(sender, instance, created, **kwargs):
     if created:
-        group_name = instance.receiver_id.account_id
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            group_name,
+            instance.receiver_id.account_id,
+            {
+            'type': 'send_message',
+            'message': instance,
+            }
+        )
+        async_to_sync(channel_layer.group_send)(
+            instance.sender_id.account_id,
             {
             'type': 'send_message',
             'message': instance,

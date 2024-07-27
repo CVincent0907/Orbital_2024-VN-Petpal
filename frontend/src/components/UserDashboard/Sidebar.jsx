@@ -7,6 +7,8 @@ import profileIcon from "../../assets/icons/profile.svg";
 
 
 export function Sidebar() {
+    // TODO: update options handling
+
     return (
         <ol className="sidebar">
             <SidebarOption icon={pawIcon} label="Pets" url="pets" />

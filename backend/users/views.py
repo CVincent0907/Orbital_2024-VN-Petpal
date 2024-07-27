@@ -42,8 +42,11 @@ class StdUserUpdate(APIView):
 class StdUserList(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request):
-        queryset = StdUser.objects.all()
+    def get(self, request, q=None):
+        if q:
+            queryset = StdUser.objects.filter(display_name__startswith=q)
+        else:
+            queryset = StdUser.objects.all()
         serializer = StdUserSerializer(queryset, many=True, context={'request': request})
         return Response({'users': serializer.data}, status=status.HTTP_200_OK)
 

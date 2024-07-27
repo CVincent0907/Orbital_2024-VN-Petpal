@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, get_user_model
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,6 +7,8 @@ from rest_framework import permissions, status
 from .serializers import UserSerializer, UserLoginSerializer, EmailIsAvailableSerializer
 from shelters.serializers import ShelterSerializer
 from users.serializers import StdUserSerializer
+
+UserModel = get_user_model()
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -60,16 +62,23 @@ class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
 
-    def get(self, request):
-        serializer = UserSerializer(request.user, context={'request': request})
+    def get(self, request, account_id=None):
+        if account_id:
+            try:
+                account = UserModel.objects.get(pk=account_id)
+            except (UserModel.DoesNotExist):
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            account = request.user
+        serializer = UserSerializer(account, context={'request': request})
         response_data = {**serializer.data}
-        if request.user.role == 'SHELTER':
-            shelter = request.user.shelter_data
+        if account.role == 'SHELTER':
+            shelter = account.shelter_data
             if shelter:
                 shelter_data = ShelterSerializer(shelter, context={'request': request}).data
                 response_data['data'] = shelter_data
-        elif request.user.role == 'USER':
-            user = request.user.user_data
+        elif account.role == 'USER':
+            user = account.user_data
             if user:
                 user_data = StdUserSerializer(user, context={'request': request}).data
                 response_data['data'] = user_data

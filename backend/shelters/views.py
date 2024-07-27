@@ -53,8 +53,11 @@ class ShelterUpdate(APIView):
 class ShelterList(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request):
-        queryset = Shelter.objects.all()
+    def get(self, request, q=None):
+        if q:
+            queryset = Shelter.objects.filter(name__startswith=q)
+        else:
+            queryset = Shelter.objects.all()
         serializer = ShelterSerializer(queryset, many=True, context={'request': request})
         return Response({'shelters': serializer.data}, status=status.HTTP_200_OK)
 

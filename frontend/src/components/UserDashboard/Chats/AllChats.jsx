@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../utils/contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ChatSearch } from "./ChatSearch";
 import imagePlaceholder from "../../../assets/icons/image-placeholder.svg";
 
 export function AllChats({ socket, messages }) {
@@ -13,13 +14,14 @@ export function AllChats({ socket, messages }) {
     } */
     const id = useContext(UserContext).account.account_id;
     const navigate = useNavigate();
+    const location = useLocation();
     const [chats, setChats] = useState([]);
 
     useEffect(() => {
         const handleMessage = (e) => {
             const message = JSON.parse(e.data);
             updateChats(message);
-        }
+        };
         socket.addEventListener("message", handleMessage);
         setChats(getChats(messages));
         return () => {
@@ -56,7 +58,7 @@ export function AllChats({ socket, messages }) {
     function updateChats(message) {
         const sent = message.sender_id == id;
         const other_id = sent ? message.receiver_id : message.sender_id;
-        const img = sent ? m.receiver_img : m.sender_img;
+        const img = sent ? message.receiver_img : message.sender_img;
         const newChat = {
             'other_id': other_id,
             'name': sent ? message.receiver_name : message.sender_name,
@@ -67,12 +69,22 @@ export function AllChats({ socket, messages }) {
     }
 
     return (
-        <div>
+        <div className="chat-allchats">
             <h2>Chats</h2>
-            {chats.map((chat) => <div onClick={(e) => navigate(chat.other_id)}>
-                <h3>{chat.name}</h3>
-                <p>{chat.last_message}</p>
-            </div>)}
+            <ChatSearch />
+            <ol className="chat-list">
+                {chats.map((chat) => 
+                    <li key={chat.other_id} 
+                    className={`chat-listitem${location.pathname.endsWith(chat.other_id) ? " active" : ""}`} 
+                    onClick={(e) => navigate(chat.other_id)}>
+                        <img className="chat-avatar" src={chat.img} alt="avatar" />
+                        <div className="chat-desc">
+                            <h3>{chat.name}</h3>
+                            <p>{chat.last_message.length > 40 ? chat.last_message.substring(0, 39) + "..." : chat.last_message}</p>
+                        </div>
+                    </li>
+                )}
+            </ol>
         </div>
     );
 }
