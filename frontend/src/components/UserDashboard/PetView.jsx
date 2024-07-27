@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 import axiosInstance from "../../utils/axiosInstance";
+import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import { ImagesSection } from "./ImagesSection";
 import { SheltersListItem } from "./SheltersListItem";
-import { ShelterContext } from "../../utils/contexts/ShelterContext";
-import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 
 
 export function PetView() {
