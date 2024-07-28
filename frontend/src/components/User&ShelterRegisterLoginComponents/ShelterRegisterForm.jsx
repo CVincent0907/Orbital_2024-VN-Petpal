@@ -22,17 +22,15 @@ export default function ShelterRegisterForm() {
         password: "",
     });
 
-    const [address, setAddress] = useState({
-        unit_number: "",
-        street_name: "",
+    /* {
         address_line_1: "",
         address_line_2: "",
-        region: "",
         postcode: "",
         city: "",
         state: "",
         country: "",
-    });
+    } */
+    const [address, setAddress] = useState(null);
 
     // Function to post registration and login data
     const postData = async () => {

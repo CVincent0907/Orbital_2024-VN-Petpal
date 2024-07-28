@@ -17,7 +17,7 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
     const [state, setState] = useState("");
     const [phone, setPhone] = useState("");
 
-    const Submit = async (e) => {
+    const Submit = (e) => {
         e.preventDefault();
         if (!country) {
             alert("Please fill in all required fields.");
@@ -29,7 +29,6 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
             phone_number: phone,
         }));
         setAddress((address) => ({
-            ...address,
             address_line_1: addressLine1,
             address_line_2: addressLine2,
             postcode: postcode,

@@ -5,7 +5,7 @@ export default function Phone(props) {
         <div className="phone-section">
             <label for="phone">Telephone:</label>
             <div className="phone">
-                <input type="tel" id="phone" name="number" placeholder="phone" onChange={(e) => props.phone(e.target.value)} required></input>
+                <input type="tel" id="phone" name="number" placeholder="phone" onChange={(e) => props.phone(e.target.value)}></input>
             </div>
         </div>
 )
