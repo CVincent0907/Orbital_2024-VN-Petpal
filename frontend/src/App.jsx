@@ -8,9 +8,9 @@ import UserLogin from "./routes/UserLogin";
 import UserRegisterPg from "./routes/UserRegisterPg";
 // UserDashboard
 import UserDashboard from "./routes/UserDashboard";
-import { PetsList } from "./components/UserDashboard/PetsList";
+import { PetsList } from "./components/UserDashboard/PetsList/PetsList";
 import { PetView } from "./components/UserDashboard/PetView";
-import { SheltersList } from "./components/UserDashboard/SheltersList";
+import { SheltersList } from "./components/UserDashboard/SheltersList/SheltersList";
 import { ShelterView } from "./components/UserDashboard/ShelterView";
 import { Chats as UserChats } from "./components/UserDashboard/Chats/Chats";
 import { ProfileEdit } from "./components/UserDashboard/ProfileEdit";

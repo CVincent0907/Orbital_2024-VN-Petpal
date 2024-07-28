@@ -1643,3 +1643,115 @@ option {
   box-shadow: 4px 4px 4px var(--shadow-color);
   translate: -2px -2px;
 }
+
+/* PetsList searchbar */
+.petsearch-container {
+  --vertical-padding: 0.5rem;
+  width: 50vw;
+  height: calc((var(--navbar-height) / 2) + (var(--vertical-padding) * 2));
+  position: absolute;
+  top: calc((var(--navbar-height) / 4) - var(--vertical-padding));
+  left: 25vw;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  padding: var(--vertical-padding) 1rem;
+}
+
+.petsearch-container img {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.petsearch-search {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border-right: 1px solid var(--secondary-text-color);
+}
+
+.petsearch-search input {
+  background-color: transparent;
+  border: none;
+}
+
+.petsearch-search input:focus {
+  outline: none;
+}
+
+.petsearch-type-selection, .petsearch-type-selection:focus {
+  border: none;
+  outline: none;
+}
+
+.petsearch-results-container {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: calc((var(--navbar-height) / 2) + 1rem + 0.25rem);
+  background-color: var(--primary-color);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+  box-shadow: 0px 0px 5px black;
+  padding: 0.5rem 0;
+  border-radius: 8px;
+}
+
+.petsearch-results-search {
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.petsearch-results-search:hover {
+  background-color: var(--secondary-color);
+}
+
+.petsearch-results-label {
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid var(--secondary-text-color);
+}
+
+.petsearch-results-container ol {
+  display: flex;
+  flex-flow: column nowrap;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.petsearch-results-container ol li {
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+}
+
+.petsearch-results-container ol li:hover {
+  background-color: var(--secondary-color);
+}
+
+/* SheltersList searchbar */
+.sheltersearch-container {
+  --vertical-padding: 0.5rem;
+  width: 50vw;
+  height: calc((var(--navbar-height) / 2) + (var(--vertical-padding) * 2));
+  position: absolute;
+  top: calc((var(--navbar-height) / 4) - var(--vertical-padding));
+  left: 25vw;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  padding: var(--vertical-padding) 1rem;
+}
+
+.sheltersearch-container input {
+  width: 100%;
+  border: none;
+}
+
+.sheltersearch-container input:focus {
+  outline: none;
+}

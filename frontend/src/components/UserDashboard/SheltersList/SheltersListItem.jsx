@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShelterContext } from "../../utils/contexts/ShelterContext";
-import locationIcon from "../../assets/icons/location.svg";
+import { ShelterContext } from "../../../utils/contexts/ShelterContext";
+import locationIcon from "../../../assets/icons/location.svg";
 
 
 export function SheltersListItem() {

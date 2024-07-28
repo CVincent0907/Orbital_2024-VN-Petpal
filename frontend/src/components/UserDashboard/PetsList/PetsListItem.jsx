@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PetContext } from "../../utils/contexts/PetContext";
+import { PetContext } from "../../../utils/contexts/PetContext";
 
 
 export function PetsListItem() {

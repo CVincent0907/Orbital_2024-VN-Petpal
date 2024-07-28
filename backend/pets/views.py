@@ -41,11 +41,16 @@ class PetDetail(APIView):
 class PetList(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, shelter_id=None):
+    def get(self, request):
+        shelter_id = request.GET.get('sid', '')
         if shelter_id:
             queryset = Pet.objects.filter(shelter_id=shelter_id)
         else:
             queryset = Pet.objects.all()
+        petType = request.GET.get('type', '')
+        if petType: queryset = queryset.filter(type=petType)
+        q = request.GET.get('q', '')
+        if q: queryset = queryset.filter(name__startswith=q)
         serializer = PetSerializer(queryset, many=True, context={'request': request})
         return Response({'pets': serializer.data}, status=status.HTTP_200_OK)
 

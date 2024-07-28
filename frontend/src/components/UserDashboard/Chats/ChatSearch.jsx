@@ -90,8 +90,7 @@ export function ChatSearch() {
                 onFocus={() => {if (val.length > 0) setOpen(true);}}
                 onBlur={() => {if (val.length == 0) setOpen(false);}}
             />
-            {open && <img className="chatsearch-close-button" src={crossIcon} alt="close-icon" onClick={() => setOpen(false)} />
-            }
+            {open && <img className="chatsearch-close-button" src={crossIcon} alt="close-icon" onClick={() => setOpen(false)} />}
             {open && <Results users={users} shelters={shelters} loading={loading} />}
         </div>
     );

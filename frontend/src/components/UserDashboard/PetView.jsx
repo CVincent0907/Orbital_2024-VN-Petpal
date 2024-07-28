@@ -4,7 +4,7 @@ import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 import axiosInstance from "../../utils/axiosInstance";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import { ImagesSection } from "./ImagesSection";
-import { SheltersListItem } from "./SheltersListItem";
+import { SheltersListItem } from "./SheltersList/SheltersListItem";
 
 export function PetView() {
     // Extract pet ID from URL parameters
