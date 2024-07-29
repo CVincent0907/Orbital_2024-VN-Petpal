@@ -13,7 +13,7 @@ export function PetsList() {
 
     useEffect(() => {
         document.title = "Pets";
-        axiosInstance.get(`api/pets/list/${searchParams.toString()}`)
+        axiosInstance.get(`api/pets/list/?${searchParams.toString()}`)
         .then((res) => {
             setPets(res.data.pets);
         });
