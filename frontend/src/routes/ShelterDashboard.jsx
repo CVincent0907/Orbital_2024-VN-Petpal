@@ -23,9 +23,12 @@ export default function ShelterDashboard() {
         document.title = "Dashboard";
         axiosInstance.get("api/auth/acc/")
         .then((res) => {
+            if (res.data.role !== "SHELTER") {
+                navigate("/dashboard/pets");
+                return;
+            }
             setShelterData(res.data.data);
             setCompleted(true);
-            navigate("list/");
         })
         .catch((error) => {
             alert("Error: " + error.Message)

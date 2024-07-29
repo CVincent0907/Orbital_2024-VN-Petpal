@@ -23,7 +23,7 @@ export default function Login({ role }) {
             if (role === "USER") {
                 navigate("/dashboard/pets");
             } else {
-                navigate('/shelter/dashboard');
+                navigate('/shelter/dashboard/list');
             }
         }).catch((error) => {
             alert("Error: " + error.message);

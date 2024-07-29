@@ -8,6 +8,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { ShelterContext } from "../../utils/contexts/ShelterContext";
 import ConfirmLogoutModal from "./ConfirmLogoutModal";
 import { SidebarOption } from "./SidebarOption";
+import logoutIcon from "../../assets/icons/logout.svg";
 
 export default function Sidebar() {
     const shelterData = useContext(ShelterContext);
@@ -25,9 +26,6 @@ export default function Sidebar() {
     const handleConfirm = async () => {
         axiosInstance.post('/api/auth/logout/')
         .then((res) => {
-          // Assuming logout is successful
-          alert(`Logout successful! Response data: ${JSON.stringify(res.data)}`);
-          // Navigate to the homepage after logout
           navigate('/'); 
         })
         .catch((error) => {
@@ -47,13 +45,16 @@ export default function Sidebar() {
                 <SidebarOption icon={pawIcon} label="Listed animals" url="list" />
                 <SidebarOption icon={customizeProfile} label="Customize Profile" url="profile" />
                 <SidebarOption icon={email} label="Inbox" url="chats" />
+                <li className="sidenav-option" onClick={handleLogoutClick}>
+                    <img src={logoutIcon} alt="logout icon" />
+                    <p>Logout</p>
+                </li>
+                <ConfirmLogoutModal 
+                    isOpen={isModalOpen}
+                    onRequestClose={handleCancel}
+                    onConfirm={handleConfirm}
+                />
             </ol>
-            <button className="logout-button" onClick={handleLogoutClick}>Logout</button>
-            <ConfirmLogoutModal 
-                isOpen={isModalOpen}
-                onRequestClose={handleCancel}
-                onConfirm={handleConfirm}
-            />
         </div>
     )
 }
