@@ -16,7 +16,7 @@ import { Chats as UserChats } from "./components/UserDashboard/Chats/Chats";
 import { ProfileEdit } from "./components/UserDashboard/ProfileEdit";
 // ShelterDashboard
 import ShelterDashboard from "./routes/ShelterDashboard";
-import { PetEdit } from "./routes/PetEdit";
+import { PetEdit } from "./components/DashboardComponents/PetEdit";
 import PetCreate from "./components/DashboardComponents/PetCreate";
 import { ListedAnimals } from "./components/DashboardComponents/ListedAnimals";
 import { ShelterEdit } from "./components/DashboardComponents/ShelterEdit";

@@ -7,7 +7,6 @@ import Particular_section2 from "./Particular_section2";
 
 export default function PetCreate() {
     const navigate = useNavigate();
-    const { setNavbarInfo } = useOutletContext();
     const [petData, setPetData] = useState({
         name: "",
         avatar: null,
@@ -18,16 +17,6 @@ export default function PetCreate() {
     });
     // Image data structure: {image: <image.jpg>, description: ""}
     const [images, setImages] = useState([]);
-
-    useEffect(() => {
-        // Set the navigation bar information
-        setNavbarInfo({
-            title: "Add animal listing",
-            icon_src: backIcon,
-            icon_alt: "back",
-            icon_onClick: () => navigate(-1), // Go back on clicking the back icon
-        });
-    }, [setNavbarInfo, navigate]);
 
     // Handle changes to the form data
     const handleFormDataChange = (name, value) => {
@@ -70,7 +59,7 @@ export default function PetCreate() {
             }
         })
         .then(() => {
-            navigate("/shelter/dashboard");
+            navigate("/shelter/dashboard/list");
         })
         .catch((error) => {
             alert("Error creating pet:", error.message);

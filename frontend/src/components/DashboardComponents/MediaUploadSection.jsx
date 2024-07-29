@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import MediaUpload from "./MediaUpload";
 
 
-export function MediaUploadSection({ onChange }) {
-    // Media data structure: {url: "...", type: "image/video"}
-    const [mediaArr, setMediaArr] = useState([])
+export function MediaUploadSection({ initMediaArr, onChange }) {
+    // Media data structure: {image: "...", type: "image/video"}
+    const [mediaArr, setMediaArr] = useState(initMediaArr ? initMediaArr : []);
 
     const addImage = (file) => onChange(file);
     const addMedia = (media) => {
@@ -12,15 +12,11 @@ export function MediaUploadSection({ onChange }) {
             ...mediaArr,
             media
         ]);
-        console.log("update mediaArr");
     };
 
     return (
         <div className="media-upload-container">
-            {mediaArr.map((media) => media.type === 'image'
-                ? (<img src={media.url} alt="Uploaded content" className="uploaded-image" />)
-                : (<video src={media.url} controls className="uploaded-image" />))
-            }
+            {mediaArr.map((media) => (<img src={media.image} alt="Uploaded content" className="uploaded-image" />))}
             <MediaUpload addFile={addImage} addMedia={addMedia} />
         </div>
     );

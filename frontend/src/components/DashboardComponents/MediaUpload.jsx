@@ -13,7 +13,7 @@ export default function MediaUpload({ addFile, addMedia }) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 addMedia({
-                    url: reader.result,
+                    image: reader.result,
                     type: file.type.startsWith('image/') ? 'image' : 'video'
                 });
                 addFile(file); // Pass the file to the parent component
@@ -33,7 +33,7 @@ export default function MediaUpload({ addFile, addMedia }) {
                 onChange={handleFileChange}
                 style={{ display: 'none' }}
                 // TODO: handle videos
-                accept="image/*"
+                accept="image/jpeg, image/png"
             />
         </div>
     );
