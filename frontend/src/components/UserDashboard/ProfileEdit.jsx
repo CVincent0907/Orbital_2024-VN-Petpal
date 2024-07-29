@@ -83,8 +83,8 @@ export function ProfileEdit() {
                 },
             })
             .then((res) => {
-                alert("Profile pic updated");
                 setAvatarChanged(false);
+                window.location.reload();
             })
             .catch((err) => {
                 alert("An error occurred during update");

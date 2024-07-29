@@ -54,7 +54,8 @@ export function ShelterEdit() {
     };
 
     // Handle form submission to update shelter data and avatar
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault();
         if (dataChanged) {
             axiosInstance.put("/api/shelters/update/", {
                 ...shelterData,
@@ -76,8 +77,8 @@ export function ShelterEdit() {
                 },
             })
             .then((res) => {
-                alert("Profile pic updated");
                 setAvatarChanged(false);
+                window.location.reload();
             })
             .catch((err) => {
                 alert("An error occurred during update");

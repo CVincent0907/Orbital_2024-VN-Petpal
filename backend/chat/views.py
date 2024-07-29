@@ -27,5 +27,5 @@ class ChatView(APIView):
         else:
             messages = ChatMessage.objects.filter(Q(sender_id=sender) | Q(receiver_id=sender))
         #TODO: optimize for less database hit, add pagination
-        serializer = ChatMessageSerializer(messages, many=True)
+        serializer = ChatMessageSerializer(messages, many=True, context={'request': request})
         return Response({"messages": serializer.data}, status=status.HTTP_200_OK)
