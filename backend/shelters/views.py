@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import permissions, status
+from django.db.models import F, Case, When
+from django.db.models.functions import Radians, Sin, Cos, ATan2, Sqrt, Power
 
 from .serializers import ShelterSerializer, ShelterRegisterSerializer, ShelterProfilePicSerializer, ShelterImageSerializer
 from .models import Shelter
@@ -58,6 +60,19 @@ class ShelterList(APIView):
             queryset = Shelter.objects.filter(name__startswith=q)
         else:
             queryset = Shelter.objects.all()
+        user = request.user
+        if not user.is_anonymous and user.role == "USER":
+            address = user.user_data.address
+            if address and address.is_valid:
+                queryset = (queryset
+                        .annotate(dLat=Radians(F('address__lat') - address.lat), dLng=Radians(F('address__lng') - address.lng))
+                        .annotate( a=( Power(Sin(F('dLat') / 2), 2) +
+                                       Cos(Radians(F('address__lat'))) * Cos(Radians(address.lat)) *
+                                       Power(Sin(F('dLng')), 2) ) )
+                        .annotate( c=( 2 * ATan2(Sqrt(F('a')), Sqrt(1 - F('a'))) ) )
+                        .annotate( d=Case(When(address__is_valid=True, then=6371*F('c')), default=50000.0) )
+                        .order_by('d')
+                        )
         serializer = ShelterSerializer(queryset, many=True, context={'request': request})
         return Response({'shelters': serializer.data}, status=status.HTTP_200_OK)
 

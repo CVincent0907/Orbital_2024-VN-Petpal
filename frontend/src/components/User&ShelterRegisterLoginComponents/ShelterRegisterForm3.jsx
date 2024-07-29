@@ -23,11 +23,6 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
             alert("Please fill in all required fields.");
             return;
         }
-        setData((data) => ({
-            ...data,
-            country: country,
-            phone_number: phone,
-        }));
         setAddress((address) => ({
             address_line_1: addressLine1,
             address_line_2: addressLine2,
@@ -36,22 +31,20 @@ export default function ShelterRegisterForm3({ handleSubmit, setData, setAddress
             state: state,
             country: country,
         }));
+        setData((data) => ({
+            ...data,
+            country: country,
+            phone_number: phone,
+        }));
+        
         handleSubmit();
     };
-
-    const handleSetCountry = (param) => {
-        setCountry(param);
-        setAddress((addr) => ({
-            ...addr,
-            country: param,
-        }));
-    }
 
     return (
         <div>
         <section className="RegisterFormSection">
             <form className="registerForm" onSubmit={Submit}>
-            <Country country={handleSetCountry}/>
+            <Country country={setCountry}/>
             {/* TODO: change handling of data with inputs */}
             <Address address1={setAddressLine1} address2={setAddressLine2} postcode={setPostcode} city={setCity} state={setState}/>
             <Phone phone={setPhone}/>

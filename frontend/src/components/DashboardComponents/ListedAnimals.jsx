@@ -23,7 +23,7 @@ export function ListedAnimals() {
         });
         
         // Fetch the list of pets from the shelter
-        axiosInstance.get("api/pets/list/" + shelterData.shelter_id)
+        axiosInstance.get("api/pets/list/?sid=" + shelterData.shelter_id)
         .then((res) => {
             setPets(res.data.pets);
         });
