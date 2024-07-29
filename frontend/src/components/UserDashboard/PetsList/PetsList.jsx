@@ -17,7 +17,7 @@ export function PetsList() {
         .then((res) => {
             setPets(res.data.pets);
         });
-    }, []);
+    }, [searchParams]);
 
     return (
         <>
