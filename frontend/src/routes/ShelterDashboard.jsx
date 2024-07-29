@@ -11,6 +11,13 @@ export default function ShelterDashboard() {
     const navigate = useNavigate();
     const [shelterData, setShelterData] = useState({});
     const [completed, setCompleted] = useState(false);
+    // TODO: improve navbar icon handling
+    const [navbarInfo, setNavbarInfo] = useState({
+        title: "",
+        icon_src: moreIcon,
+        icon_alt: "more",
+        icon_onClick: () => {},
+    });
 
     useEffect(() => {
         document.title = "Dashboard";

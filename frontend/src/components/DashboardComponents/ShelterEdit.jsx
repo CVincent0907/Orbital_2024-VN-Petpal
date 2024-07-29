@@ -9,6 +9,7 @@ import { InputField } from "../ui/InputField";
 import Email from "../../assets/icons/email.svg";
 import Location from "../../assets/icons/location.svg";
 import Phone from "../../assets/icons/phone.svg";
+import { MediaUploadSection } from "./MediaUploadSection";
 
 export function ShelterEdit() {
     useEffect(() => {
@@ -28,6 +29,7 @@ export function ShelterEdit() {
         phone_number: initShelterData.phone_number,
     });
 
+    const [newImages, setNewImages] = useState([]);
     const [address, setAddress] = useState(initShelterData.address);
     const [avatar, setAvatar] = useState(initShelterData.profile_pic);
 
@@ -53,6 +55,17 @@ export function ShelterEdit() {
         setDataChanged(true);
     };
 
+    const addImage = (file) => {
+        setNewImages((images) => [
+            ...images,
+            {
+                image: file,
+                description: ""
+            }
+        ]);
+        setDataChanged(true);
+    };
+
     // Handle form submission to update shelter data and avatar
     function handleSubmit(e) {
         e.preventDefault();
@@ -62,6 +75,12 @@ export function ShelterEdit() {
                 address: address,
             })
             .then((res) => {
+                for (const image of newImages) {
+                    axiosInstance.postForm("/api/shelters/upload-image/", image)
+                    .catch((error) => {
+                        alert("Error uploading photo:", error.message);
+                    });
+                }
                 alert("Data saved!");
                 setDataChanged(false);
             })
@@ -102,7 +121,7 @@ export function ShelterEdit() {
             <hr />
             <div className="shelteredit-gallery">
                 <h2>Photos &amp; videos</h2>
-                <p>This feature is temporarily disabled due to having too many bugs 😓</p>
+                <p><MediaUploadSection initMediaArr={initShelterData.images} onChange={addImage} /></p>
             </div>
             <hr />
             <div className="shelteredit-contact">
