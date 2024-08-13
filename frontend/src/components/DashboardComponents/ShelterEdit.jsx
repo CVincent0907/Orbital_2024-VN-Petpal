@@ -83,6 +83,7 @@ export function ShelterEdit() {
                 }
                 alert("Data saved!");
                 setDataChanged(false);
+                window.location.reload();
             })
             .catch((err) => {
                 alert("An error occurred during update");
