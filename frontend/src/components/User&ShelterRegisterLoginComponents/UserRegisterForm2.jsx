@@ -49,7 +49,7 @@ export default function UserRegisterForm2({goBack, handleSubmit, setData, setAdd
     return (
         <div className="user-register-form1">
              <section className="RegisterFormSection">
-                <form className="registerForm" >
+                <form className="registerForm" onSubmit={goToNextPage}>
                     <label className="input-field-name" for="Display-name">Display-name:</label>
                     <input type="text" placeholder="Display-name" id="Display-name" name="Display-name" required 
                         onChange={(e) => setName(e.target.value)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 
@@ -26,27 +26,32 @@ export default function UserRegisterForm() {
     const [address, setAddress] = useState(null);
 
     // Function to post data to the server
-    const postData = async () => {
-        axiosInstance.post('api/auth/register/user/', {
-            account: account,
-            ...userData,
-            address: address
-        }).then((res) => {
-            alert("Your account has been successfully created!");
-            axiosInstance.post('api/auth/login/', account)
-            .then((res) => {
-                // TODO: handle data returned by storing it in a context
-                navigate('/dashboard');
+    const [post, setPost] = useState(true);
+    const isMounted = useRef(false);
+    useEffect(() => {
+        if (isMounted.current) {
+            axiosInstance.post('api/auth/register/user/', {
+                account: account,
+                ...userData,
+                address: address
+            }).then((res) => {
+                alert("Your account has been successfully created!");
+                axiosInstance.post('api/auth/login/', account)
+                .then((res) => {
+                    // TODO: handle data returned by storing it in a context
+                    navigate('/dashboard/pets');
+                }).catch((error) => {
+                    console.log(error);
+                    alert("There was an error during login: " + error.Message);
+                    navigate('/login');
+                })
             }).catch((error) => {
-                console.log(error);
-                alert("There was an error during login: " + error.Message);
-                navigate('/login');
+                console.error("There was an error completing the registration!", error);
+                // alert("Registration failed. Please try again. Message: " + error.message);
             })
-        }).catch((error) => {
-            console.error("There was an error completing the registration!", error);
-            alert("Registration failed. Please try again. Message: " + error.message);
-        })
-    };
+        }
+        isMounted.current = true;
+    }, [post]);
 
     // State to manage form index (for multi-step form navigation)
     const [index, setIndex] = useState(1);
@@ -66,6 +71,6 @@ export default function UserRegisterForm() {
         case 1:
             return <RegisterForm1 handleSubmit={next} setData={setAccount} />
         case 2:
-            return <RegisterForm2 goBack={back} handleSubmit={postData} setData={setUserData} setAddress={setAddress} />;
+            return <RegisterForm2 goBack={back} handleSubmit={() => setPost(val => !val)} setData={setUserData} setAddress={setAddress} />;
     }
 }
