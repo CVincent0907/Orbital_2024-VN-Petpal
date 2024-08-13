@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import moreIcon from "../../assets/DashboardIcon/more_icon.svg";
 import imagePlaceholder from "../../assets/icons/image-placeholder.svg";
 import axiosInstance from "../../utils/axiosInstance";
 import { PetContext } from "../../utils/contexts/PetContext";
@@ -9,19 +8,10 @@ import ListedAnimal from "./ListedAnimal";
 
 export function ListedAnimals() {
     const navigate = useNavigate();
-    const { setNavbarInfo } = useOutletContext();
     const shelterData = useContext(ShelterContext);
     const [pets, setPets] = useState([]);
 
-    useEffect(() => {
-        // Set the navigation bar information
-        setNavbarInfo({
-            title: "",
-            icon_src: moreIcon,
-            icon_alt: "more",
-            icon_onClick: () => {},
-        });
-        
+    useEffect(() => {        
         // Fetch the list of pets from the shelter
         axiosInstance.get("api/pets/list/?sid=" + shelterData.shelter_id)
         .then((res) => {

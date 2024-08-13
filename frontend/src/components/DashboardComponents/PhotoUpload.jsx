@@ -35,6 +35,7 @@ function PhotoUpload({ onChange }) {
         ref={fileInputRef}
         onChange={handleFileChange}
         style={{ display: 'none' }}
+        accept='image/png, image/jpeg'
       />
     </div>
   );
