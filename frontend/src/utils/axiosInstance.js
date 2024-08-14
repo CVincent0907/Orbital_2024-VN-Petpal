@@ -17,7 +17,7 @@ function getCookie(name) {
 }
 
 const axiosInstance = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: 'https://orbital-2024-vn-petpal.onrender.com',
     withCredentials: true,
     xsrfCookieName: 'csrftoken',
     xsrfHeaderName: 'X-CSRFToken',
