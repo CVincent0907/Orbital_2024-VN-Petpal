@@ -68,8 +68,6 @@ INSTALLED_APPS = [
     'users',
     'pets',
     'chat',
-
-    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -108,19 +106,24 @@ ASGI_APPLICATION = 'petpalBack.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'PetPal',
-        # 'USER': 'root',
-        # 'PASSWORD': 'Nathan0509',
-        # 'HOST': 'localhost',
-        # 'PORT': '3306',
+if ENVIRONMENT == 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv("DATABASE_NAME"),
+            'USER': os.getenv("DATABASE_USER"),
+            'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+            'HOST': os.getenv("DATABASE_HOST"),
+            'PORT': int(os.getenv("DATABASE_PORT", default=3306)),
+        }
+    }
 
 
 # Password validation
