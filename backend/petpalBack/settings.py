@@ -114,15 +114,9 @@ if ENVIRONMENT == 'development':
         }
     }
 else:
+    import dj_database_url
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv("DATABASE_NAME"),
-            'USER': os.getenv("DATABASE_USER"),
-            'PASSWORD': os.getenv("DATABASE_PASSWORD"),
-            'HOST': os.getenv("DATABASE_HOST"),
-            'PORT': int(os.getenv("DATABASE_PORT", default=3306)),
-        }
+        'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
     }
 
 
