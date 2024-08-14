@@ -58,6 +58,8 @@ export function ProfileEdit() {
     // Handle form submission for saving changes
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission behavior
+
+        let promise = Promise.resolve();
         
         // Update user data if changes were made
         if (dataChanged) {
@@ -77,13 +79,10 @@ export function ProfileEdit() {
 
         // Update avatar if changes were made
         if (avatarChanged) {
-            axiosInstance.put("/api/users/upload-profilepic/", {profile_pic: avatar}, {
+            promise = axiosInstance.put("/api/users/upload-profilepic/", {profile_pic: avatar}, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
-            })
-            .then((res) => {
-                setAvatarChanged(false);
             })
             .catch((err) => {
                 alert("An error occurred during update");
@@ -91,7 +90,7 @@ export function ProfileEdit() {
             });
         }
 
-        window.location.reload();
+        promise.then(() => window.location.reload());
     };
 
     return (

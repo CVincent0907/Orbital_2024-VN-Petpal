@@ -114,7 +114,7 @@ export function ShelterEdit() {
     }
 
     return (
-        <form className="shelteredit-container">
+        <form className="shelteredit-container" onSubmit={handleSubmit}>
             <div className="shelteredit-profile">
                 {/* Image upload component for profile picture */}
                 <ImageUpload initImage={avatar} onChange={(file) => {setAvatar(file); setAvatarChanged(true);}} />

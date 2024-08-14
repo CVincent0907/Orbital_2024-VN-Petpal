@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hvilp2$tj!k=)h77*ges3h!6@0=w16bib8)14sgru3yq1yz=kq'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENVIRONMENT == "development":
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
@@ -44,9 +52,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
 
     # third-party
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'channels',
@@ -149,7 +159,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+if ENVIRONMENT == 'development':
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+else:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_STORAGE = {
+        'CLOUDINARY_URL': os.getenv("CLOUDINARY_URL")
+    }
 
 MEDIA_URL = "/media/"
 

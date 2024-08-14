@@ -26,7 +26,7 @@ export default function Login({ role }) {
                 navigate('/shelter/dashboard/list');
             }
         }).catch((error) => {
-            alert("Error: " + error.message);
+            alert("The email and/or password entered is incorrect");
             console.log(error);
         });
     };
