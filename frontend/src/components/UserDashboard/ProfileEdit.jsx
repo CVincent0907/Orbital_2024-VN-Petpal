@@ -84,13 +84,14 @@ export function ProfileEdit() {
             })
             .then((res) => {
                 setAvatarChanged(false);
-                window.location.reload();
             })
             .catch((err) => {
                 alert("An error occurred during update");
                 console.error(err.message);
             });
         }
+
+        window.location.reload();
     };
 
     return (
@@ -121,6 +122,8 @@ export function ProfileEdit() {
                         setDataChanged(true);
                     }} 
                 />
+                {(!dataChanged && (!address || !address.is_valid)) && <p>*Location based sorting disabled. Address is invalid OR service is down.</p>}
+                {(!dataChanged && (address && address.is_valid)) && <p>*Your address is being used to sort shelters and pets by location.</p>}
             </div>
             {/* Save button shown only if there are changes */}
             {(dataChanged || avatarChanged) && 

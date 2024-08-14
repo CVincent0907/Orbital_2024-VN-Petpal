@@ -27,7 +27,7 @@ export function ShelterView() {
                 }));
             }
             setCompleted(true);
-            document.title = `View Shelter: ${shelterData.name}`;
+            document.title = `View Shelter: ${res.data.name}`;
         })
         .catch((error) => {
             alert("Error: " + error.Message)
@@ -90,6 +90,7 @@ export function ShelterView() {
                         <p>{shelterData.phone_number}</p>
                     </div>
                 }
+                {(!shelterData.address || !shelterData.address.is_valid) && <p>*This shelter is excluded from location based sorting due to invalid address.</p>}
             </div>
         </div>
     );

@@ -17,6 +17,9 @@ export function PetView() {
         // Fetch pet details using the pet ID
         axiosInstance.get(`/api/pets/detail/${id}`)
         .then((res) => {
+            // Set the document title to include the pet's name
+            document.title = `View Pet: ${res.data.name}`;
+
             setPetData(res.data);
 
             // Set placeholder image if pet does not have an avatar
@@ -42,9 +45,6 @@ export function PetView() {
 
                 // Mark the data as fully loaded
                 setCompleted(true);
-                
-                // Set the document title to include the pet's name
-                document.title = `View Pet: ${petData.name}`;
             })
             .catch((error) => {
                 alert("Error fetching shelter data: " + error.Message);

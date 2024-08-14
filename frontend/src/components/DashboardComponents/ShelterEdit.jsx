@@ -81,12 +81,12 @@ export function ShelterEdit() {
                         alert("Error uploading photo:", error.message);
                     });
                 }
-                alert("Data saved!");
+                // alert("Data saved!");
                 setDataChanged(false);
-                window.location.reload();
+                setNewImages([]);
             })
             .catch((err) => {
-                alert("An error occurred during update");
+                // alert("An error occurred during update");
                 console.error(err.message);
             });
         }
@@ -101,7 +101,7 @@ export function ShelterEdit() {
                 window.location.reload();
             })
             .catch((err) => {
-                alert("An error occurred during update");
+                // alert("An error occurred during update");
                 console.error(err.message);
             });
         }
@@ -133,6 +133,7 @@ export function ShelterEdit() {
                         <Address label={false} initAddress={address} setAddress={(param) => {setAddress(param); setDataChanged(true);}} />
                         {/* Country selection field */}
                         <CountrySelectionField label={false} initCountry={shelterData.country} setCountry={setCountry} />
+                        {(!dataChanged && (!address || !address.is_valid)) && <p>*Location based sorting disabled. Address is invalid OR service is down.</p>}
                     </div>
                 </div>
                 {/* Contact email input field */}
