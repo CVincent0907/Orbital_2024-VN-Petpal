@@ -183,6 +183,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:3000',
     'https://orbital2024-vn-petpal.vercel.app',
     'https://orbital2024-vn-petpal-git-master-robotwizzards-projects.vercel.app',
+    'https://orbital2024-vn-petpal-robotwizzards-projects.vercel.app/',
 ]
 CSRF_COOKIE_PATH = '/'
 # CSRF_USE_SESSIONS = True
@@ -193,6 +194,7 @@ CORS_ALLOWED_ORIGINS = (
     'http://127.0.0.1:3000',
     'https://orbital2024-vn-petpal.vercel.app',
     'https://orbital2024-vn-petpal-git-master-robotwizzards-projects.vercel.app',
+    'https://orbital2024-vn-petpal-robotwizzards-projects.vercel.app/',
 )
 CORS_ALLOW_CREDENTIALS = True
 
