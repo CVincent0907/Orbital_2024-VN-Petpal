@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'users',
     'pets',
     'chat',
+
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

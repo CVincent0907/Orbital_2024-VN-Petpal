@@ -69,42 +69,48 @@ export function ShelterEdit() {
     // Handle form submission to update shelter data and avatar
     function handleSubmit(e) {
         e.preventDefault();
+
+        const promises = [];
+
+        if (avatarChanged) {
+            promises.push(
+                axiosInstance.put("/api/shelters/upload-profilepic/", {profile_pic: avatar}, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .catch((err) => {
+                    // alert("An error occurred during update");
+                    console.error(err.message);
+                })
+            );
+        }
         if (dataChanged) {
-            axiosInstance.put("/api/shelters/update/", {
-                ...shelterData,
-                address: address,
-            })
-            .then((res) => {
-                for (const image of newImages) {
+            promises.push(
+                axiosInstance.put("/api/shelters/update/", {
+                    ...shelterData,
+                    address: address,
+                })
+                .catch((err) => {
+                    // alert("An error occurred during update");
+                    console.error(err.message);
+                })
+            );
+            // alert("put data");
+            for (const image of newImages) {
+                promises.push(
                     axiosInstance.postForm("/api/shelters/upload-image/", image)
                     .catch((error) => {
                         alert("Error uploading photo:", error.message);
-                    });
-                }
-                // alert("Data saved!");
-                setDataChanged(false);
-                setNewImages([]);
-            })
-            .catch((err) => {
-                // alert("An error occurred during update");
-                console.error(err.message);
-            });
+                    })
+                );
+                // alert("put image");
+            }
         }
-        if (avatarChanged) {
-            axiosInstance.put("/api/shelters/upload-profilepic/", {profile_pic: avatar}, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then((res) => {
-                setAvatarChanged(false);
-                window.location.reload();
-            })
-            .catch((err) => {
-                // alert("An error occurred during update");
-                console.error(err.message);
-            });
-        }
+
+        Promise.all(promises).then(() => {
+            window.location.reload();
+        });
     }
 
     return (
