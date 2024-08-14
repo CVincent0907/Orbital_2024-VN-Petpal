@@ -104,6 +104,10 @@ input {
   right: 2.5rem;
 }
 
+.account-id {
+  font-size: small;
+}
+
 /* RegisterPg */
 .login-main {
   height: 100vh;

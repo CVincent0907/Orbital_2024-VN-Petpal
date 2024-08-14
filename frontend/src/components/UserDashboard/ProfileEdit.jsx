@@ -125,6 +125,7 @@ export function ProfileEdit() {
                 {(!dataChanged && (!address || !address.is_valid)) && <p>*Location based sorting disabled. Address is invalid OR service is down.</p>}
                 {(!dataChanged && (address && address.is_valid)) && <p>*Your address is being used to sort shelters and pets by location.</p>}
             </div>
+            <p className="account-id">id: @{initUserData.account.account_id}</p>
             {/* Save button shown only if there are changes */}
             {(dataChanged || avatarChanged) && 
                 <button 

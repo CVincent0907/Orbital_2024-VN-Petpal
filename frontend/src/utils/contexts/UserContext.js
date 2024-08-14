@@ -17,7 +17,8 @@ export const UserContext = createContext({
         postcode: "",
         city: "",
         state: "",
-        country: ""
+        country: "",
+        is_valid: false
     },
     display_name: "",
     profile_pic: null,

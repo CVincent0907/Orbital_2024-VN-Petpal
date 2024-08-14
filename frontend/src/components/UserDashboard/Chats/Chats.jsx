@@ -47,6 +47,8 @@ export function Chats() {
 
 function EmptyChat() {
     return (
-        <p>Select a user to start chatting!</p>
+        <div className="indvchat-container">
+            <p>Select a user to start chatting!</p>
+        </div>
     );
 }

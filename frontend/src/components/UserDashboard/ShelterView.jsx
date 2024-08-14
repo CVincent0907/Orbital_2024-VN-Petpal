@@ -92,6 +92,7 @@ export function ShelterView() {
                 }
                 {(!shelterData.address || !shelterData.address.is_valid) && <p>*This shelter is excluded from location based sorting due to invalid address.</p>}
             </div>
+            <p className='account-id'>id: @{shelterData.account.account_id}</p>
         </div>
     );
 }

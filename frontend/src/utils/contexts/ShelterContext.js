@@ -17,7 +17,8 @@ export const ShelterContext = createContext({
         postcode: "",
         city: "",
         state: "",
-        country: ""
+        country: "",
+        is_valid: false
     },
     name: "",
     description: "",

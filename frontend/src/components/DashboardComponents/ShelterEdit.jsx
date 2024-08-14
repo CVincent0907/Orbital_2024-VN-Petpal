@@ -153,6 +153,7 @@ export function ShelterEdit() {
                     <InputField type="tel" value={shelterData.phone_number} placeholder="Phone number" onChange={(e) => {setParticularData("phone_number", e.target.value);}} />
                 </div>
             </div>
+            <p className="account-id">id: @{initShelterData.account.account_id}</p>
             {/* Show save button only if data or avatar has changed */}
             {(dataChanged || avatarChanged) && <button type="submit" className="btn-primary floating--bottom-right" onClick={handleSubmit}>Save</button>}
         </form>
